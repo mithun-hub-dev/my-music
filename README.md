@@ -1,2 +1,2 @@
 # my-music
-My personal music playlist
+My music playlist
