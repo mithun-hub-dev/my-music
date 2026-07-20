@@ -1,100 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mithun Music Playlist</title>
+<title>Mithun Music</title>
+
 
 <style>
 
 *{
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
 }
 
 
 body{
 
-    margin:0;
-    background:#0b0b12;
-    color:white;
-
-}
-
-
-header{
-
-    text-align:center;
-    padding:40px 20px;
-    background:linear-gradient(135deg,#8e2de2,#4a00e0);
-
-}
-
-
-header h1{
-
-    font-size:42px;
-    margin:0;
-
-}
-
-
-header p{
-
-    font-size:18px;
-
-}
-
-
-.search{
-
-    margin-top:20px;
-    padding:15px;
-    width:300px;
-    border-radius:30px;
-    border:none;
-    outline:none;
+background:#000;
+color:white;
 
 }
 
 
 
-.playlist{
-
-    padding:30px;
-    display:grid;
-    grid-template-columns:
-    repeat(auto-fit,minmax(300px,1fr));
-
-    gap:25px;
-
-}
+/* SIDE MENU */
 
 
+.sidebar{
 
-.song{
-
-    background:#181820;
-    padding:20px;
-    border-radius:20px;
-
-    display:flex;
-    align-items:center;
-    gap:20px;
-
-    transition:.3s;
+position:fixed;
+width:230px;
+height:100vh;
+background:#050505;
+padding:25px;
 
 }
 
 
 
-.song:hover{
+.logo{
 
-    transform:translateY(-8px);
-    background:#252535;
+font-size:28px;
+font-weight:bold;
+color:#1ed760;
+
+margin-bottom:40px;
+
+}
+
+
+.menu{
+
+font-size:17px;
+margin:20px 0;
+
+color:#bbb;
+
+}
+
+
+
+/* MAIN */
+
+
+.main{
+
+margin-left:230px;
+padding:30px;
+
+background:
+linear-gradient(#222,#000);
+
+min-height:100vh;
+
+}
+
+
+
+.title{
+
+font-size:32px;
+margin-bottom:30px;
+
+}
+
+
+
+/* SONG GRID */
+
+
+.music-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+
+gap:25px;
+
+}
+
+
+
+.card{
+
+background:#181818;
+
+padding:20px;
+
+border-radius:12px;
+
+transition:.3s;
+
+}
+
+
+
+.card:hover{
+
+background:#282828;
+transform:translateY(-5px);
 
 }
 
@@ -102,67 +131,107 @@ header p{
 
 .cover{
 
-    width:80px;
-    height:80px;
-    border-radius:15px;
+height:180px;
 
-    background:
-    linear-gradient(45deg,#ff512f,#dd2476);
+border-radius:10px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+background:
+linear-gradient(135deg,#1db954,#191414);
 
-    font-size:35px;
+display:flex;
 
-}
+align-items:center;
 
+justify-content:center;
 
+font-size:70px;
 
-.song h3{
-
-    margin:0 0 10px 0;
+margin-bottom:15px;
 
 }
 
 
 
-button{
+.card h3{
 
-    background:#1db954;
-    color:white;
+font-size:18px;
 
-    border:none;
-    padding:10px 25px;
-
-    border-radius:30px;
-
-    cursor:pointer;
+margin-bottom:15px;
 
 }
 
 
 
-button:hover{
+.play{
 
-    background:#16a34a;
+background:#1ed760;
+
+border:none;
+
+height:45px;
+width:45px;
+
+border-radius:50%;
+
+font-size:20px;
+
+cursor:pointer;
+
+float:right;
 
 }
 
+
+
+
+/* PLAYER */
 
 
 .player{
 
-    position:fixed;
-    bottom:0;
+position:fixed;
 
-    width:100%;
+bottom:0;
 
-    background:#111118;
+left:0;
 
-    padding:15px;
+width:100%;
 
-    text-align:center;
+height:90px;
+
+background:#181818;
+
+display:flex;
+
+align-items:center;
+
+padding:15px 30px;
+
+gap:20px;
+
+}
+
+
+
+.song-name{
+
+width:200px;
+
+}
+
+
+
+.controls button{
+
+background:none;
+
+border:none;
+
+color:white;
+
+font-size:25px;
+
+cursor:pointer;
 
 }
 
@@ -170,7 +239,90 @@ button:hover{
 
 audio{
 
-    width:90%;
+flex:1;
+
+}
+
+
+
+
+/* MOBILE */
+
+
+@media(max-width:700px){
+
+
+.sidebar{
+
+display:none;
+
+}
+
+
+.main{
+
+margin:0;
+
+padding:20px;
+
+}
+
+
+
+.music-grid{
+
+grid-template-columns:
+repeat(2,1fr);
+
+}
+
+
+
+.card{
+
+padding:12px;
+
+}
+
+
+
+.cover{
+
+height:120px;
+
+}
+
+
+
+.player{
+
+height:110px;
+
+padding:10px;
+
+display:block;
+
+text-align:center;
+
+}
+
+
+
+.song-name{
+
+width:auto;
+
+margin-bottom:5px;
+
+}
+
+
+audio{
+
+width:100%;
+
+}
+
 
 }
 
@@ -181,189 +333,239 @@ audio{
 </head>
 
 
+
 <body>
 
 
-<header>
 
-<h1>🎵 Mithun Music</h1>
-
-<p>My Personal Music Playlist</p>
-
-<input class="search" 
-placeholder="Search Songs..." 
-onkeyup="searchSong()" 
-id="search">
+<div class="sidebar">
 
 
-</header>
+<div class="logo">
+🎵 Mithun Music
+</div>
+
+
+<div class="menu">
+🏠 Home
+</div>
+
+
+<div class="menu">
+🎧 My Playlist
+</div>
+
+
+<div class="menu">
+❤️ Favorites
+</div>
+
+
+</div>
 
 
 
-<div class="playlist" id="playlist">
 
 
-<div class="song">
+<div class="main">
 
-<div class="cover">🎵</div>
 
-<div>
+<h1 class="title">
+Good Evening 🎶
+</h1>
+
+
+
+<div class="music-grid">
+
+
+
+<div class="card">
+
+<div class="cover">
+🎵
+</div>
 
 <h3>Enthara Enthara</h3>
 
-<button onclick="playSong('Enthara-Enthara.mp3')">
-▶ Play
+<button class="play"
+onclick="playSong(0)">
+▶
 </button>
 
 </div>
 
+
+
+
+
+<div class="card">
+
+<div class="cover">
+🎵
 </div>
-
-
-
-
-<div class="song">
-
-<div class="cover">🎵</div>
-
-<div>
 
 <h3>Gulmohar Malare</h3>
 
-<button onclick="playSong('Gulmohar-Malare.mp3')">
-▶ Play
+<button class="play"
+onclick="playSong(1)">
+▶
 </button>
 
 </div>
 
+
+
+
+
+<div class="card">
+
+<div class="cover">
+🎵
 </div>
-
-
-
-
-<div class="song">
-
-<div class="cover">🎵</div>
-
-<div>
 
 <h3>Hey Minnale</h3>
 
-<button onclick="playSong('Hey Minnale.mp3')">
-▶ Play
+<button class="play"
+onclick="playSong(2)">
+▶
 </button>
 
 </div>
 
+
+
+
+
+<div class="card">
+
+<div class="cover">
+🎵
 </div>
-
-
-
-
-<div class="song">
-
-<div class="cover">🎵</div>
-
-<div>
 
 <h3>Kanave</h3>
 
-<button onclick="playSong('Kanave.mp3')">
-▶ Play
+<button class="play"
+onclick="playSong(3)">
+▶
 </button>
 
 </div>
 
+
+
+
+
+<div class="card">
+
+<div class="cover">
+🎵
 </div>
-
-
-
-
-<div class="song">
-
-<div class="cover">🎵</div>
-
-<div>
 
 <h3>Neeyae</h3>
 
-<button onclick="playSong('Neeyae.mp3')">
-▶ Play
+<button class="play"
+onclick="playSong(4)">
+▶
 </button>
 
 </div>
 
+
+
+
+
+<div class="card">
+
+<div class="cover">
+🎵
 </div>
-
-
-
-
-<div class="song">
-
-<div class="cover">🎵</div>
-
-<div>
 
 <h3>Uyirey</h3>
 
-<button onclick="playSong('Uyirey.mp3')">
-▶ Play
+<button class="play"
+onclick="playSong(5)">
+▶
 </button>
 
 </div>
 
+
+
+
+
+<div class="card">
+
+<div class="cover">
+🎵
 </div>
-
-
-
-
-<div class="song">
-
-<div class="cover">🎵</div>
-
-<div>
 
 <h3>Vaane Vaane</h3>
 
-<button onclick="playSong('Vaane Vaane.mp3')">
-▶ Play
+<button class="play"
+onclick="playSong(6)">
+▶
 </button>
 
 </div>
 
+
+
+
+
+<div class="card">
+
+<div class="cover">
+🎵
 </div>
-
-
-
-
-<div class="song">
-
-<div class="cover">🎵</div>
-
-<div>
 
 <h3>Vennilavu Saaral</h3>
 
-<button onclick="playSong('Vennilavu Saaral.mp3')">
-▶ Play
+<button class="play"
+onclick="playSong(7)">
+▶
 </button>
 
 </div>
 
+
+
 </div>
 
 
-
 </div>
+
 
 
 
 
 <div class="player">
 
-<h3 id="now">
-Select a Song
-</h3>
+
+<div class="song-name" id="now">
+No Song Selected
+</div>
+
+
+<div class="controls">
+
+<button onclick="previous()">
+⏮
+</button>
+
+
+<button onclick="pausePlay()">
+⏯
+</button>
+
+
+<button onclick="next()">
+⏭
+</button>
+
+
+</div>
+
 
 <audio id="audio" controls></audio>
 
@@ -373,7 +575,34 @@ Select a Song
 
 
 
+
 <script>
+
+
+let songs=[
+
+
+"Enthara-Enthara.mp3",
+
+"Gulmohar-Malare.mp3",
+
+"Hey Minnale.mp3",
+
+"Kanave.mp3",
+
+"Neeyae.mp3",
+
+"Uyirey.mp3",
+
+"Vaane Vaane.mp3",
+
+"Vennilavu Saaral.mp3"
+
+
+];
+
+
+let index=0;
 
 
 let audio=document.getElementById("audio");
@@ -382,59 +611,66 @@ let now=document.getElementById("now");
 
 
 
-function playSong(song){
+function playSong(i){
 
 
-audio.src=song;
+index=i;
+
+audio.src=songs[index];
 
 audio.play();
 
+now.innerHTML=songs[index];
 
-now.innerHTML="Playing : "+song;
+
+}
+
+
+
+
+function next(){
+
+
+index++;
+
+if(index>=songs.length)
+index=0;
+
+
+playSong(index);
 
 
 }
 
 
 
-function searchSong(){
+
+function previous(){
 
 
-let input=document
-.getElementById("search")
-.value
-.toLowerCase();
+index--;
+
+if(index<0)
+index=songs.length-1;
 
 
-
-let songs=document
-.getElementsByClassName("song");
-
-
-
-for(let i=0;i<songs.length;i++){
-
-
-let text=songs[i]
-.innerText
-.toLowerCase();
-
-
-
-if(text.includes(input)){
-
-songs[i].style.display="flex";
-
-}
-
-else{
-
-songs[i].style.display="none";
-
-}
+playSong(index);
 
 
 }
+
+
+
+function pausePlay(){
+
+
+if(audio.paused)
+
+audio.play();
+
+else
+
+audio.pause();
 
 
 }
