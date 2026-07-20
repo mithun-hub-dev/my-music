@@ -429,13 +429,10 @@ nextBtn.click();
 
 search.addEventListener("input",()=>{
 
-
-let text=search.value.toLowerCase();
-
+let text = search.value.toLowerCase();
 
 
-let filteredSongs=playlist.filter(song=>{
-
+let filteredSongs = playlist.filter(song=>{
 
 return (
 
@@ -447,9 +444,7 @@ song.artist.toLowerCase().includes(text)
 
 );
 
-
 });
-
 
 
 buildPlaylist(filteredSongs);
