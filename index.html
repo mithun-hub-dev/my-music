@@ -1,100 +1,400 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>🎵 My Music</title>
+
+<title>🎵 Mithun's Music</title>
 
 <style>
+
 body{
     font-family:Arial,sans-serif;
     background:#111;
     color:white;
-    max-width:700px;
-    margin:auto;
-    padding:20px;
+    margin:0;
 }
+
+
+/* Main layout */
+
+.container{
+
+display:flex;
+gap:30px;
+padding:20px;
+
+}
+
+
+/* Left playlist */
+
+.playlist{
+
+width:65%;
+
+}
+
 
 h1{
-    text-align:center;
+
+text-align:center;
+
 }
+
 
 .song{
-    background:#222;
-    margin:15px 0;
-    padding:15px;
-    border-radius:10px;
+
+background:#222;
+margin:15px 0;
+padding:15px;
+border-radius:10px;
+
 }
+
+
+.song h3{
+
+margin-bottom:5px;
+
+}
+
+
+.movie{
+
+color:#aaa;
+font-size:14px;
+margin-bottom:10px;
+
+}
+
 
 audio{
-    width:100%;
+
+width:100%;
+
 }
 
-a{
-    color:#4db8ff;
+
+/* Right control panel */
+
+.controls{
+
+width:30%;
+background:#222;
+border-radius:15px;
+padding:20px;
+height:200px;
+text-align:center;
+
 }
+
+
+button{
+
+background:#4db8ff;
+border:none;
+padding:12px 18px;
+margin:10px;
+border-radius:8px;
+font-size:18px;
+cursor:pointer;
+
+}
+
+
+button:hover{
+
+background:white;
+color:black;
+
+}
+
+
+
+/* Mobile view */
+
+@media(max-width:700px){
+
+.container{
+
+display:block;
+
+}
+
+
+.playlist,
+.controls{
+
+width:100%;
+
+}
+
+
+.controls{
+
+margin-top:20px;
+
+}
+
+}
+
+
 </style>
+
 </head>
+
 
 <body>
 
+
+<div class="container">
+
+
+<!-- LEFT SIDE SONG LIST -->
+
+<div class="playlist">
+
+
 <h1>🎵 Mithun's Playlist</h1>
 
+
 <div class="song">
+
 <h3>Enthara Enthara</h3>
-<audio controls>
+
+<div class="movie">
+Movie: Thirumanam Enum Nikkah
+</div>
+
+<audio id="song1" controls>
 <source src="Enthara-Enthara.mp3" type="audio/mpeg">
 </audio>
+
 </div>
 
+
+
 <div class="song">
+
 <h3>Gulmohar Malare</h3>
-<audio controls>
+
+<div class="movie">
+Movie: Majunu
+</div>
+
+<audio id="song2" controls>
 <source src="Gulmohar-Malare.mp3" type="audio/mpeg">
 </audio>
+
 </div>
 
+
+
+
 <div class="song">
+
 <h3>Hey Minnale</h3>
-<audio controls>
+
+<div class="movie">
+Movie: Amaran
+</div>
+
+<audio id="song3" controls>
 <source src="Hey Minnale.mp3" type="audio/mpeg">
 </audio>
+
 </div>
 
+
+
 <div class="song">
+
 <h3>Kanave</h3>
-<audio controls>
+
+<div class="movie">
+Movie: Amaran
+</div>
+
+<audio id="song4" controls>
 <source src="Kanave.mp3" type="audio/mpeg">
 </audio>
+
 </div>
 
+
+
 <div class="song">
+
 <h3>Neeyae</h3>
-<audio controls>
+
+<div class="movie">
+Movie: Pugazh
+</div>
+
+<audio id="song5" controls>
 <source src="Neeyae.mp3" type="audio/mpeg">
 </audio>
+
 </div>
 
+
+
 <div class="song">
+
 <h3>Uyire</h3>
-<audio controls>
+
+<div class="movie">
+Movie: Amaran
+</div>
+
+<audio id="song6" controls>
 <source src="Uyirey.mp3" type="audio/mpeg">
 </audio>
+
 </div>
 
+
+
 <div class="song">
+
 <h3>Vaane Vaane</h3>
-<audio controls>
+
+<div class="movie">
+Movie: Amaran
+</div>
+
+<audio id="song7" controls>
 <source src="Vaane Vaane.mp3" type="audio/mpeg">
 </audio>
+
 </div>
 
+
+
 <div class="song">
+
 <h3>Vennilavu Saaral</h3>
-<audio controls>
+
+<div class="movie">
+Movie: Amaran
+</div>
+
+<audio id="song8" controls>
 <source src="Vennilavu Saaral.mp3" type="audio/mpeg">
 </audio>
+
 </div>
+
+
+</div>
+
+
+
+<!-- RIGHT SIDE PLAYER -->
+
+<div class="controls">
+
+<h2>🎧 Player</h2>
+
+
+<button onclick="previousSong()">⏮</button>
+
+<button onclick="stopSong()">⏹</button>
+
+<button onclick="nextSong()">⏭</button>
+
+
+<p id="status">
+Select a song
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+<script>
+
+
+let songs=document.querySelectorAll("audio");
+
+let current=0;
+
+
+
+function playSong(index){
+
+songs.forEach(song=>{
+song.pause();
+song.currentTime=0;
+});
+
+songs[index].play();
+
+current=index;
+
+document.getElementById("status").innerHTML=
+"Playing Song "+(index+1);
+
+}
+
+
+
+function nextSong(){
+
+current++;
+
+if(current>=songs.length){
+
+current=0;
+
+}
+
+playSong(current);
+
+}
+
+
+
+
+function previousSong(){
+
+current--;
+
+if(current<0){
+
+current=songs.length-1;
+
+}
+
+playSong(current);
+
+}
+
+
+
+
+function stopSong(){
+
+songs[current].pause();
+
+songs[current].currentTime=0;
+
+document.getElementById("status").innerHTML=
+"Stopped";
+
+}
+
+
+
+</script>
+
 
 </body>
 </html>
