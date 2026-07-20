@@ -254,3 +254,12 @@ body{
 }
 
 }
+
+.favorite{
+
+background:none;
+border:none;
+font-size:22px;
+cursor:pointer;
+
+}
