@@ -264,8 +264,6 @@ pauseSong();
 
 };
 
-
-
 // ==========================
 // Next Song
 // ==========================
@@ -275,26 +273,6 @@ nextBtn.onclick=()=>{
 playNextSong();
 
 };
-
-
-currentSong++;
-
-
-if(currentSong>=playlist.length){
-
-currentSong=0;
-
-}
-
-
-loadSong(currentSong);
-
-playSong();
-
-
-};
-
-
 
 // ==========================
 // Previous Song
