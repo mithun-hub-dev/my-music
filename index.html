@@ -59,10 +59,13 @@ text-align:center;
 
 .song::before{
 
-    content:"";
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,0.65);
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(
+rgba(0,0,0,0.75),
+rgba(0,0,0,0.75)
+);
 
 }
 
@@ -208,7 +211,7 @@ Movie: Majunu
 
 
 
-<div class="song" style="background-image:url('images/amaran.jpg');">
+<div class="song" style="background-image:url('images/Amaran_2024.jpg');">
 
 <h3>Hey Minnale</h3>
 
@@ -224,7 +227,7 @@ Movie: Amaran
 
 
 
-<div class="song" style="background-image:url('images/amaran.jpg');">
+<div class="song" style="background-image:url('images/Amaran_2024.jpg');">
 
 <h3>Kanave</h3>
 
@@ -240,7 +243,7 @@ Movie: Amaran
 
 
 
-<div class="song" style="background-image:url('images/pugazh.jpg');">
+<div class="song" style="background-image:url('images/Pugazh.jpg');">
 
 <h3>Neeyae</h3>
 
@@ -256,7 +259,7 @@ Movie: Pugazh
 
 
 
-<div class="song" style="background-image:url('images/amaran.jpg');">
+<div class="song" style="background-image:url('images/Amaran_2024.jpg');">
 
 <h3>Uyire</h3>
 
@@ -272,7 +275,7 @@ Movie: Amaran
 
 
 
-<div class="song" style="background-image:url('images/amaran.jpg');">
+<div class="song" style="background-image:url('images/Amaran_2024.jpg');">
 
 <h3>Vaane Vaane</h3>
 
@@ -288,7 +291,7 @@ Movie: Amaran
 
 
 
-<div class="song" style="background-image:url('images/amaran.jpg');">
+<div class="song" style="background-image:url('images/Amaran_2024.jpg');">
 
 <h3>Vennilavu Saaral</h3>
 
@@ -343,8 +346,6 @@ let current = 0;
 let isPlaying = false;
 
 
-/* Song names */
-
 let songNames = [
 
 "Enthara Enthara",
@@ -360,66 +361,120 @@ let songNames = [
 
 
 
-function playSong(index){
+// Detect when user clicks any audio player
 
-songs.forEach(song=>{
-    song.pause();
-    song.currentTime = 0;
+songs.forEach((song,index)=>{
+
+
+song.addEventListener("play",function(){
+
+
+songs.forEach((other,i)=>{
+
+if(i !== index){
+
+other.pause();
+
+}
+
 });
 
 
-songs[index].play();
+current=index;
 
-current = index;
-
-isPlaying = true;
+isPlaying=true;
 
 
 document.getElementById("playPauseBtn").innerHTML="⏸";
 
 
-document.getElementById("status").innerHTML =
-"Now Playing: " + songNames[index];
+document.getElementById("status").innerHTML=
+"Now Playing: "+songNames[index];
+
+
+});
+
+
+});
+
+
+
+
+
+function playSong(index){
+
+
+songs.forEach(song=>{
+
+song.pause();
+
+song.currentTime=0;
+
+});
+
+
+songs[index].play();
+
+
+current=index;
+
+
+isPlaying=true;
+
+
+document.getElementById("playPauseBtn").innerHTML="⏸";
+
+
+document.getElementById("status").innerHTML=
+"Now Playing: "+songNames[index];
+
 
 }
+
 
 
 
 
 function nextSong(){
 
+
 current++;
 
 
 if(current >= songs.length){
 
-current = 0;
+current=0;
 
 }
 
 
 playSong(current);
 
+
 }
+
 
 
 
 
 function previousSong(){
 
+
 current--;
 
 
 if(current < 0){
 
-current = songs.length-1;
+current=songs.length-1;
 
 }
 
 
 playSong(current);
 
+
 }
+
 
 
 
@@ -427,10 +482,20 @@ playSong(current);
 function playPauseSong(){
 
 
+
+if(!songs[current]){
+
+return;
+
+}
+
+
+
 if(isPlaying){
 
 
 songs[current].pause();
+
 
 isPlaying=false;
 
@@ -438,8 +503,8 @@ isPlaying=false;
 document.getElementById("playPauseBtn").innerHTML="▶️";
 
 
-document.getElementById("status").innerHTML =
-"Paused: " + songNames[current];
+document.getElementById("status").innerHTML=
+"Paused: "+songNames[current];
 
 
 }
@@ -449,14 +514,15 @@ else{
 
 songs[current].play();
 
+
 isPlaying=true;
 
 
 document.getElementById("playPauseBtn").innerHTML="⏸";
 
 
-document.getElementById("status").innerHTML =
-"Now Playing: " + songNames[current];
+document.getElementById("status").innerHTML=
+"Now Playing: "+songNames[current];
 
 
 }
