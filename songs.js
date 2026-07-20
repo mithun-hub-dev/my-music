@@ -82,6 +82,6 @@ artist:"Tamil OST",
 movie:"Jeans",
 file:"songs/Poovukkul.mp3",
 cover:"images/Jeans1998.jpg"
-},
+}
   
 ];
