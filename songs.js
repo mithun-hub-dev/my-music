@@ -72,7 +72,7 @@ cover:"images/Amaran_2024.jpg"
 title:"Varaya-Thozhi",
 artist:"Tamil OST",
 movie:"Movie Name",
-file:"Varaya-Thozhi.mp3",
+file:"songs/Varaya-Thozhi.mp3",
 cover:"images/Jeans1998.jpg"
 },
 
