@@ -113,6 +113,8 @@ const durationText=document.getElementById("duration");
 
 const favoritesMenu=document.getElementById("favoritesMenu");
 
+const homeMenu=document.getElementById("homeMenu");
+
 let currentSong=0;
 
 let shuffleMode=false;
@@ -608,5 +610,17 @@ favorites.includes(song.title)
 
 buildPlaylist(favoriteSongs);
 
+
+};
+
+// ==========================
+// Home Menu
+// ==========================
+
+homeMenu.onclick=()=>{
+
+search.value="";
+
+buildPlaylist(playlist);
 
 };
