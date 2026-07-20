@@ -295,3 +295,89 @@ volume.oninput=()=>{
 audio.volume=volume.value;
 
 };
+
+// ==========================
+// Progress Bar & Time Update
+// ==========================
+
+audio.addEventListener("timeupdate", ()=>{
+
+if(audio.duration){
+
+let progressPercent = (audio.currentTime / audio.duration) * 100;
+
+progress.value = progressPercent;
+
+
+// Current time display
+
+let currentMinutes = Math.floor(audio.currentTime / 60);
+
+let currentSeconds = Math.floor(audio.currentTime % 60);
+
+if(currentSeconds < 10){
+
+currentSeconds = "0" + currentSeconds;
+
+}
+
+currentTimeText.innerHTML = `${currentMinutes}:${currentSeconds}`;
+
+
+// Duration display
+
+let durationMinutes = Math.floor(audio.duration / 60);
+
+let durationSeconds = Math.floor(audio.duration % 60);
+
+if(durationSeconds < 10){
+
+durationSeconds = "0" + durationSeconds;
+
+}
+
+durationText.innerHTML = `${durationMinutes}:${durationSeconds}`;
+
+}
+
+});
+
+
+
+// ==========================
+// Seek Song Using Progress Bar
+// ==========================
+
+progress.oninput=()=>{
+
+if(audio.duration){
+
+audio.currentTime = (progress.value / 100) * audio.duration;
+
+}
+
+};
+
+
+
+// ==========================
+// Reset Progress When New Song Loads
+// ==========================
+
+audio.addEventListener("loadedmetadata", ()=>{
+
+progress.value=0;
+
+});
+
+
+
+// ==========================
+// Auto Play Next Song
+// ==========================
+
+audio.addEventListener("ended", ()=>{
+
+nextBtn.click();
+
+});
