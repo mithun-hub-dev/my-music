@@ -103,12 +103,20 @@ const volume=document.getElementById("volume");
 
 const search=document.getElementById("search");
 
+const shuffleBtn=document.getElementById("shuffle");
+
+const repeatBtn=document.getElementById("repeat");
+
 const currentTimeText=document.getElementById("currentTime");
 
 const durationText=document.getElementById("duration");
 
 
 let currentSong=0;
+
+let shuffleMode=false;
+
+let repeatMode=false;
 
 
 // ==========================
@@ -264,6 +272,10 @@ pauseSong();
 
 nextBtn.onclick=()=>{
 
+playNextSong();
+
+};
+
 
 currentSong++;
 
@@ -416,7 +428,7 @@ progress.value=0;
 
 audio.addEventListener("ended",()=>{
 
-nextBtn.click();
+playNextSong();
 
 });
 
@@ -451,3 +463,117 @@ buildPlaylist(filteredSongs);
 
 
 });
+
+// ==========================
+// Shuffle Button
+// ==========================
+
+shuffleBtn.onclick=()=>{
+
+shuffleMode=!shuffleMode;
+
+
+if(shuffleMode){
+
+shuffleBtn.style.opacity="0.5";
+
+}
+
+else{
+
+shuffleBtn.style.opacity="1";
+
+}
+
+
+};
+
+
+
+// ==========================
+// Repeat Button
+// ==========================
+
+repeatBtn.onclick=()=>{
+
+
+repeatMode=!repeatMode;
+
+
+if(repeatMode){
+
+repeatBtn.style.opacity="0.5";
+
+}
+
+else{
+
+repeatBtn.style.opacity="1";
+
+}
+
+
+};
+
+
+
+// ==========================
+// Updated Next Song Logic
+// ==========================
+
+function playNextSong(){
+
+
+if(repeatMode){
+
+loadSong(currentSong);
+
+playSong();
+
+return;
+
+}
+
+
+
+if(shuffleMode){
+
+let randomSong;
+
+
+do{
+
+randomSong=Math.floor(Math.random()*playlist.length);
+
+}
+while(randomSong===currentSong);
+
+
+
+currentSong=randomSong;
+
+
+}
+
+else{
+
+
+currentSong++;
+
+
+if(currentSong>=playlist.length){
+
+currentSong=0;
+
+}
+
+
+}
+
+
+loadSong(currentSong);
+
+playSong();
+
+
+}
