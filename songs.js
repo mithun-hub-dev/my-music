@@ -66,7 +66,7 @@ artist:"Tamil OST",
 movie:"Amaran",
 file:"songs/Vennilavu Saaral.mp3",
 cover:"images/Amaran_2024.jpg"
-}
+},
 
 {
 title:"Varaya-Thozhi",
