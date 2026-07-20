@@ -616,8 +616,20 @@ buildPlaylist(playlist);
 });
 
 
-
 favoritesMenu.addEventListener("click",()=>{
+
+search.value="";
+
+let favoriteSongs = playlist.filter(song =>
+
+favorites.includes(song.title)
+
+);
+
+buildPlaylist(favoriteSongs);
+
+});
+
 
 // ==========================
 // Playlist Menu
@@ -628,21 +640,6 @@ playlistMenu.addEventListener("click",()=>{
 search.value="";
 
 buildPlaylist(playlist);
-
-});
-
-search.value="";
-
-
-let favoriteSongs = playlist.filter(song =>
-
-favorites.includes(song.title)
-
-);
-
-
-buildPlaylist(favoriteSongs);
-
 
 });
 
