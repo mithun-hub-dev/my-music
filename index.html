@@ -46,29 +46,44 @@ text-align:center;
 
 .song{
 
-background:#222;
-margin:15px 0;
-padding:15px;
-border-radius:10px;
+    position:relative;
+    background-size:cover;
+    background-position:center;
+    margin:15px 0;
+    padding:20px;
+    border-radius:15px;
+    overflow:hidden;
 
 }
 
 
-.song h3{
+.song::before{
 
-margin-bottom:5px;
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.65);
+
+}
+
+
+.song h3,
+.song .movie,
+.song audio{
+
+    position:relative;
+    z-index:1;
 
 }
 
 
 .movie{
 
-color:#aaa;
-font-size:14px;
-margin-bottom:10px;
+    color:#ddd;
+    font-size:14px;
+    margin-bottom:10px;
 
 }
-
 
 audio{
 
@@ -160,7 +175,7 @@ margin-top:20px;
 <h1>🎵 Mithun's Playlist</h1>
 
 
-<div class="song">
+<div class="song" style="background-image:url('images/Thirumanam_ennum_nikkah.jpg');">
 
 <h3>Enthara Enthara</h3>
 
@@ -168,7 +183,7 @@ margin-top:20px;
 Movie: Thirumanam Enum Nikkah
 </div>
 
-<audio id="song1" controls>
+<audio controls>
 <source src="Enthara-Enthara.mp3" type="audio/mpeg">
 </audio>
 
@@ -176,7 +191,7 @@ Movie: Thirumanam Enum Nikkah
 
 
 
-<div class="song">
+<div class="song" style="background-image:url('images/Majunu.jpg');">
 
 <h3>Gulmohar Malare</h3>
 
@@ -184,7 +199,7 @@ Movie: Thirumanam Enum Nikkah
 Movie: Majunu
 </div>
 
-<audio id="song2" controls>
+<audio controls>
 <source src="Gulmohar-Malare.mp3" type="audio/mpeg">
 </audio>
 
@@ -193,7 +208,7 @@ Movie: Majunu
 
 
 
-<div class="song">
+<div class="song" style="background-image:url('images/amaran.jpg');">
 
 <h3>Hey Minnale</h3>
 
@@ -201,7 +216,7 @@ Movie: Majunu
 Movie: Amaran
 </div>
 
-<audio id="song3" controls>
+<audio controls>
 <source src="Hey Minnale.mp3" type="audio/mpeg">
 </audio>
 
@@ -209,7 +224,7 @@ Movie: Amaran
 
 
 
-<div class="song">
+<div class="song" style="background-image:url('images/amaran.jpg');">
 
 <h3>Kanave</h3>
 
@@ -217,7 +232,7 @@ Movie: Amaran
 Movie: Amaran
 </div>
 
-<audio id="song4" controls>
+<audio controls>
 <source src="Kanave.mp3" type="audio/mpeg">
 </audio>
 
@@ -225,7 +240,7 @@ Movie: Amaran
 
 
 
-<div class="song">
+<div class="song" style="background-image:url('images/pugazh.jpg');">
 
 <h3>Neeyae</h3>
 
@@ -233,7 +248,7 @@ Movie: Amaran
 Movie: Pugazh
 </div>
 
-<audio id="song5" controls>
+<audio controls>
 <source src="Neeyae.mp3" type="audio/mpeg">
 </audio>
 
@@ -241,7 +256,7 @@ Movie: Pugazh
 
 
 
-<div class="song">
+<div class="song" style="background-image:url('images/amaran.jpg');">
 
 <h3>Uyire</h3>
 
@@ -249,7 +264,7 @@ Movie: Pugazh
 Movie: Amaran
 </div>
 
-<audio id="song6" controls>
+<audio controls>
 <source src="Uyirey.mp3" type="audio/mpeg">
 </audio>
 
@@ -257,7 +272,7 @@ Movie: Amaran
 
 
 
-<div class="song">
+<div class="song" style="background-image:url('images/amaran.jpg');">
 
 <h3>Vaane Vaane</h3>
 
@@ -265,7 +280,7 @@ Movie: Amaran
 Movie: Amaran
 </div>
 
-<audio id="song7" controls>
+<audio controls>
 <source src="Vaane Vaane.mp3" type="audio/mpeg">
 </audio>
 
@@ -273,7 +288,7 @@ Movie: Amaran
 
 
 
-<div class="song">
+<div class="song" style="background-image:url('images/amaran.jpg');">
 
 <h3>Vennilavu Saaral</h3>
 
@@ -281,7 +296,7 @@ Movie: Amaran
 Movie: Amaran
 </div>
 
-<audio id="song8" controls>
+<audio controls>
 <source src="Vennilavu Saaral.mp3" type="audio/mpeg">
 </audio>
 
