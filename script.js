@@ -142,7 +142,9 @@ div.innerHTML=`
 
 div.onclick=()=>{
 
-loadSong(index);
+let songIndex = playlist.findIndex(item => item.title === song.title);
+
+loadSong(songIndex);
 
 playSong();
 
@@ -389,24 +391,6 @@ audio.addEventListener("ended", ()=>{
 nextBtn.click();
 
 });
-// ==========================
-// Search Songs
-// ==========================
-
-search.oninput = ()=>{
-
-let searchText = search.value.toLowerCase();
-
-let filteredSongs = playlist.filter(song =>
-
-song.title.toLowerCase().includes(searchText) ||
-
-song.artist.toLowerCase().includes(searchText) ||
-
-song.movie.toLowerCase().includes(searchText)
-
-);
-
 
 // Rebuild playlist with search results
 
@@ -453,3 +437,26 @@ playlistContainer.appendChild(div);
 
 
 };
+// ==========================
+// Search Function
+// ==========================
+
+search.addEventListener("input", function(){
+
+let text = search.value.toLowerCase();
+
+let filtered = playlist.filter(song => {
+
+return (
+song.title.toLowerCase().includes(text) ||
+song.movie.toLowerCase().includes(text) ||
+song.artist.toLowerCase().includes(text)
+);
+
+});
+
+
+buildPlaylist(filtered);
+
+
+});
