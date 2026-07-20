@@ -600,6 +600,8 @@ playSong();
 
 favoritesMenu.onclick=()=>{
 
+search.value="";
+
 
 let favoriteSongs = playlist.filter(song =>
 
@@ -610,8 +612,8 @@ favorites.includes(song.title)
 
 buildPlaylist(favoriteSongs);
 
-
 };
+
 
 // ==========================
 // Home Menu
@@ -621,6 +623,26 @@ homeMenu.onclick=()=>{
 
 search.value="";
 
-buildPlaylist(playlist);
+
+buildPlaylist([...playlist]);
 
 };
+
+// ==========================
+// Menu Active Status
+// ==========================
+
+const menus=document.querySelectorAll(".menu");
+
+
+menus.forEach(menu=>{
+
+menu.onclick=()=>{
+
+menus.forEach(item=>item.classList.remove("active"));
+
+menu.classList.add("active");
+
+};
+
+});
