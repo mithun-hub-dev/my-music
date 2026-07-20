@@ -10,64 +10,64 @@ const playlist = [
 title:"Enthara Enthara",
 artist:"Tamil OST",
 movie:"Thirumanam Enum Nikkah",
-file:"Enthara-Enthara.mp3",
-cover:"Thirumanam_ennum_nikkah.jpg"
+file:"songs/Enthara-Enthara.mp3",
+cover:"images/Thirumanam_ennum_nikkah.jpg"
 },
 
 {
 title:"Gulmohar Malare",
 artist:"Tamil OST",
 movie:"Majunu",
-file:"Gulmohar-Malare.mp3",
-cover:"Majunu.jpg"
+file:"songs/Gulmohar-Malare.mp3",
+cover:"images/Majunu.jpg"
 },
 
 {
 title:"Hey Minnale",
 artist:"Tamil OST",
 movie:"Amaran",
-file:"Hey Minnale.mp3",
-cover:"Amaran_2024.jpg"
+file:"songs/Hey Minnale.mp3",
+cover:"images/Amaran_2024.jpg"
 },
 
 {
 title:"Kanave",
 artist:"Tamil OST",
 movie:"Amaran",
-file:"Kanave.mp3",
-cover:"Amaran_2024.jpg"
+file:"songs/Kanave.mp3",
+cover:"images/Amaran_2024.jpg"
 },
 
 {
 title:"Neeyae",
 artist:"Tamil OST",
 movie:"Pugazh",
-file:"Neeyae.mp3",
-cover:"Pugazh.jpg"
+file:"songs/Neeyae.mp3",
+cover:"images/Pugazh.jpg"
 },
 
 {
 title:"Uyirey",
 artist:"Tamil OST",
 movie:"Amaran",
-file:"Uyirey.mp3",
-cover:"Amaran_2024.jpg"
+file:"songs/Uyirey.mp3",
+cover:"images/Amaran_2024.jpg"
 },
 
 {
 title:"Vaane Vaane",
 artist:"Tamil OST",
 movie:"Amaran",
-file:"Vaane Vaane.mp3",
-cover:"Amaran_2024.jpg"
+file:"songs/Vaane Vaane.mp3",
+cover:"images/Amaran_2024.jpg"
 },
 
 {
 title:"Vennilavu Saaral",
 artist:"Tamil OST",
 movie:"Amaran",
-file:"Vennilavu Saaral.mp3",
-cover:"Amaran_2024.jpg"
+file:"songs/Vennilavu Saaral.mp3",
+cover:"images/Amaran_2024.jpg"
 }
 
 ];
