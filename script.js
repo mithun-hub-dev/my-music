@@ -118,6 +118,7 @@ let shuffleMode=false;
 
 let repeatMode=false;
 
+let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
 // ==========================
 // Build Playlist
@@ -127,13 +128,14 @@ function buildPlaylist(list){
 
 playlistContainer.innerHTML="";
 
-
 list.forEach((song)=>{
-
 
 const div=document.createElement("div");
 
 div.className="song";
+
+
+let isFavorite = favorites.includes(song.title);
 
 
 div.innerHTML=`
@@ -150,9 +152,11 @@ div.innerHTML=`
 
 </div>
 
+<button class="favorite">
+${isFavorite ? "❤️" : "🤍"}
+</button>
+
 `;
-
-
 
 div.onclick=()=>{
 
@@ -165,8 +169,39 @@ playSong();
 };
 
 
-
 playlistContainer.appendChild(div);
+
+let favBtn = div.querySelector(".favorite");
+
+
+favBtn.onclick=(event)=>{
+
+event.stopPropagation();
+
+
+if(favorites.includes(song.title)){
+
+favorites = favorites.filter(item => item !== song.title);
+
+}
+
+else{
+
+favorites.push(song.title);
+
+}
+
+
+localStorage.setItem(
+"favorites",
+JSON.stringify(favorites)
+);
+
+
+buildPlaylist(list);
+
+
+};
 
 
 });
