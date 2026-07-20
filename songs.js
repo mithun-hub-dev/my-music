@@ -68,4 +68,20 @@ file:"songs/Vennilavu Saaral.mp3",
 cover:"images/Amaran_2024.jpg"
 }
 
+{
+title:"Varaya-Thozhi",
+artist:"Tamil OST",
+movie:"Movie Name",
+file:"Varaya-Thozhi.mp3",
+cover:"images/Jeans1998.jpg"
+},
+
+{
+title:"Poovukkul",
+artist:"Tamil OST",
+movie:"Jeans",
+file:"songs/Poovukkul.mp3",
+cover:"images/Jeans1998.jpg"
+},
+  
 ];
