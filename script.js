@@ -167,6 +167,14 @@ currentSong=index;
 
 audio.src=playlist[index].file;
 
+audio.load();
+
+progress.value=0;
+
+currentTimeText.innerHTML="0:00";
+
+durationText.innerHTML="0:00";
+
 cover.src=playlist[index].cover;
 
 title.innerHTML=playlist[index].title;
