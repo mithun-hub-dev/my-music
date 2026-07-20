@@ -1,7 +1,0 @@
-{
-title:"Song Name",
-artist:"Tamil OST",
-movie:"Movie Name",
-file:"songs/SongFileName.mp3",
-cover:"images/CoverFileName.jpg"
-},
