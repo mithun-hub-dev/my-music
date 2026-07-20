@@ -1,100 +1,449 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>🎵 My Music</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mithun Music Playlist</title>
 
 <style>
-body{
-    font-family:Arial,sans-serif;
-    background:#111;
-    color:white;
-    max-width:700px;
-    margin:auto;
-    padding:20px;
+
+*{
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
 }
 
-h1{
-    text-align:center;
+
+body{
+
+    margin:0;
+    background:#0b0b12;
+    color:white;
+
 }
+
+
+header{
+
+    text-align:center;
+    padding:40px 20px;
+    background:linear-gradient(135deg,#8e2de2,#4a00e0);
+
+}
+
+
+header h1{
+
+    font-size:42px;
+    margin:0;
+
+}
+
+
+header p{
+
+    font-size:18px;
+
+}
+
+
+.search{
+
+    margin-top:20px;
+    padding:15px;
+    width:300px;
+    border-radius:30px;
+    border:none;
+    outline:none;
+
+}
+
+
+
+.playlist{
+
+    padding:30px;
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(300px,1fr));
+
+    gap:25px;
+
+}
+
+
 
 .song{
-    background:#222;
-    margin:15px 0;
-    padding:15px;
-    border-radius:10px;
+
+    background:#181820;
+    padding:20px;
+    border-radius:20px;
+
+    display:flex;
+    align-items:center;
+    gap:20px;
+
+    transition:.3s;
+
 }
+
+
+
+.song:hover{
+
+    transform:translateY(-8px);
+    background:#252535;
+
+}
+
+
+
+.cover{
+
+    width:80px;
+    height:80px;
+    border-radius:15px;
+
+    background:
+    linear-gradient(45deg,#ff512f,#dd2476);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:35px;
+
+}
+
+
+
+.song h3{
+
+    margin:0 0 10px 0;
+
+}
+
+
+
+button{
+
+    background:#1db954;
+    color:white;
+
+    border:none;
+    padding:10px 25px;
+
+    border-radius:30px;
+
+    cursor:pointer;
+
+}
+
+
+
+button:hover{
+
+    background:#16a34a;
+
+}
+
+
+
+.player{
+
+    position:fixed;
+    bottom:0;
+
+    width:100%;
+
+    background:#111118;
+
+    padding:15px;
+
+    text-align:center;
+
+}
+
+
 
 audio{
-    width:100%;
+
+    width:90%;
+
 }
 
-a{
-    color:#4db8ff;
-}
+
+
 </style>
+
 </head>
+
 
 <body>
 
-<h1>🎵 Mithun's Playlist</h1>
+
+<header>
+
+<h1>🎵 Mithun Music</h1>
+
+<p>My Personal Music Playlist</p>
+
+<input class="search" 
+placeholder="Search Songs..." 
+onkeyup="searchSong()" 
+id="search">
+
+
+</header>
+
+
+
+<div class="playlist" id="playlist">
+
 
 <div class="song">
+
+<div class="cover">🎵</div>
+
+<div>
+
 <h3>Enthara Enthara</h3>
-<audio controls>
-<source src="Enthara-Enthara.mp3" type="audio/mpeg">
-</audio>
+
+<button onclick="playSong('Enthara-Enthara.mp3')">
+▶ Play
+</button>
+
 </div>
 
+</div>
+
+
+
+
 <div class="song">
+
+<div class="cover">🎵</div>
+
+<div>
+
 <h3>Gulmohar Malare</h3>
-<audio controls>
-<source src="Gulmohar-Malare.mp3" type="audio/mpeg">
-</audio>
+
+<button onclick="playSong('Gulmohar-Malare.mp3')">
+▶ Play
+</button>
+
 </div>
 
+</div>
+
+
+
+
 <div class="song">
+
+<div class="cover">🎵</div>
+
+<div>
+
 <h3>Hey Minnale</h3>
-<audio controls>
-<source src="Hey Minnale.mp3" type="audio/mpeg">
-</audio>
+
+<button onclick="playSong('Hey Minnale.mp3')">
+▶ Play
+</button>
+
 </div>
 
+</div>
+
+
+
+
 <div class="song">
+
+<div class="cover">🎵</div>
+
+<div>
+
 <h3>Kanave</h3>
-<audio controls>
-<source src="Kanave.mp3" type="audio/mpeg">
-</audio>
+
+<button onclick="playSong('Kanave.mp3')">
+▶ Play
+</button>
+
 </div>
 
+</div>
+
+
+
+
 <div class="song">
+
+<div class="cover">🎵</div>
+
+<div>
+
 <h3>Neeyae</h3>
-<audio controls>
-<source src="Neeyae.mp3" type="audio/mpeg">
-</audio>
+
+<button onclick="playSong('Neeyae.mp3')">
+▶ Play
+</button>
+
 </div>
 
-<div class="song">
-<h3>Uyire</h3>
-<audio controls>
-<source src="Uyirey.mp3" type="audio/mpeg">
-</audio>
 </div>
 
+
+
+
 <div class="song">
+
+<div class="cover">🎵</div>
+
+<div>
+
+<h3>Uyirey</h3>
+
+<button onclick="playSong('Uyirey.mp3')">
+▶ Play
+</button>
+
+</div>
+
+</div>
+
+
+
+
+<div class="song">
+
+<div class="cover">🎵</div>
+
+<div>
+
 <h3>Vaane Vaane</h3>
-<audio controls>
-<source src="Vaane Vaane.mp3" type="audio/mpeg">
-</audio>
+
+<button onclick="playSong('Vaane Vaane.mp3')">
+▶ Play
+</button>
+
 </div>
 
-<div class="song">
-<h3>Vennilavu Saaral</h3>
-<audio controls>
-<source src="Vennilavu Saaral.mp3" type="audio/mpeg">
-</audio>
 </div>
+
+
+
+
+<div class="song">
+
+<div class="cover">🎵</div>
+
+<div>
+
+<h3>Vennilavu Saaral</h3>
+
+<button onclick="playSong('Vennilavu Saaral.mp3')">
+▶ Play
+</button>
+
+</div>
+
+</div>
+
+
+
+</div>
+
+
+
+
+<div class="player">
+
+<h3 id="now">
+Select a Song
+</h3>
+
+<audio id="audio" controls></audio>
+
+
+</div>
+
+
+
+
+<script>
+
+
+let audio=document.getElementById("audio");
+
+let now=document.getElementById("now");
+
+
+
+function playSong(song){
+
+
+audio.src=song;
+
+audio.play();
+
+
+now.innerHTML="Playing : "+song;
+
+
+}
+
+
+
+function searchSong(){
+
+
+let input=document
+.getElementById("search")
+.value
+.toLowerCase();
+
+
+
+let songs=document
+.getElementsByClassName("song");
+
+
+
+for(let i=0;i<songs.length;i++){
+
+
+let text=songs[i]
+.innerText
+.toLowerCase();
+
+
+
+if(text.includes(input)){
+
+songs[i].style.display="flex";
+
+}
+
+else{
+
+songs[i].style.display="none";
+
+}
+
+
+}
+
+
+}
+
+
+
+</script>
+
 
 </body>
+
 </html>
