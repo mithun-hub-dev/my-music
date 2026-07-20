@@ -115,6 +115,8 @@ const favoritesMenu=document.getElementById("favoritesMenu");
 
 const homeMenu=document.getElementById("homeMenu");
 
+const sectionTitle=document.getElementById("sectionTitle");
+
 let currentSong=0;
 
 let shuffleMode=false;
@@ -259,20 +261,25 @@ audio.load();
 loadSong(0);
 
 
-
 // ==========================
 // Play / Pause
 // ==========================
 
 function playSong(){
 
-audio.play();
+audio.play()
+.then(()=>{
 
 playBtn.innerHTML="⏸";
 
+})
+.catch(error=>{
+
+console.log("Playback interrupted");
+
+});
+
 }
-
-
 
 function pauseSong(){
 
@@ -610,6 +617,17 @@ buildPlaylist(playlist);
 
 favoritesMenu.addEventListener("click",()=>{
 
+// ==========================
+// Playlist Menu
+// ==========================
+
+playlistMenu.addEventListener("click",()=>{
+
+search.value="";
+
+buildPlaylist(playlist);
+
+});
 
 search.value="";
 
@@ -623,5 +641,29 @@ favorites.includes(song.title)
 
 buildPlaylist(favoriteSongs);
 
+
+});
+
+// ==========================
+// Active Menu Highlight
+// ==========================
+
+const menus=document.querySelectorAll(".menu");
+
+
+menus.forEach(menu=>{
+
+menu.addEventListener("click",()=>{
+
+menus.forEach(item=>{
+
+item.classList.remove("active");
+
+});
+
+
+menu.classList.add("active");
+
+});
 
 });
