@@ -111,6 +111,7 @@ const currentTimeText=document.getElementById("currentTime");
 
 const durationText=document.getElementById("duration");
 
+const favoritesMenu=document.getElementById("favoritesMenu");
 
 let currentSong=0;
 
@@ -590,3 +591,22 @@ playSong();
 
 
 }
+
+// ==========================
+// Favorites Menu
+// ==========================
+
+favoritesMenu.onclick=()=>{
+
+
+let favoriteSongs = playlist.filter(song =>
+
+favorites.includes(song.title)
+
+);
+
+
+buildPlaylist(favoriteSongs);
+
+
+};
