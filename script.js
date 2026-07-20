@@ -115,6 +115,8 @@ const favoritesMenu=document.getElementById("favoritesMenu");
 
 const homeMenu=document.getElementById("homeMenu");
 
+const playlistMenu=document.getElementById("playlistMenu");
+
 const sectionTitle=document.getElementById("sectionTitle");
 
 let currentSong=0;
