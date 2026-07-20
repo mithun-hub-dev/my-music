@@ -389,3 +389,67 @@ audio.addEventListener("ended", ()=>{
 nextBtn.click();
 
 });
+// ==========================
+// Search Songs
+// ==========================
+
+search.oninput = ()=>{
+
+let searchText = search.value.toLowerCase();
+
+let filteredSongs = playlist.filter(song =>
+
+song.title.toLowerCase().includes(searchText) ||
+
+song.artist.toLowerCase().includes(searchText) ||
+
+song.movie.toLowerCase().includes(searchText)
+
+);
+
+
+// Rebuild playlist with search results
+
+playlistContainer.innerHTML="";
+
+
+filteredSongs.forEach((song)=>{
+
+const div=document.createElement("div");
+
+div.className="song";
+
+div.innerHTML=`
+
+<img src="${song.cover}">
+
+<div class="song-info">
+
+<h3>${song.title}</h3>
+
+<p>${song.artist}</p>
+
+<p>${song.movie}</p>
+
+</div>
+
+`;
+
+div.onclick=()=>{
+
+let songIndex = playlist.indexOf(song);
+
+loadSong(songIndex);
+
+playSong();
+
+};
+
+
+playlistContainer.appendChild(div);
+
+
+});
+
+
+};
