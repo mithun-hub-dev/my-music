@@ -298,10 +298,9 @@ Movie: Amaran
 
 <h2>🎧 Player</h2>
 
-
 <button onclick="previousSong()">⏮</button>
 
-<button onclick="stopSong()">⏹</button>
+<button onclick="playPauseSong()" id="playPauseBtn">▶️</button>
 
 <button onclick="nextSong()">⏭</button>
 
@@ -322,27 +321,53 @@ Select a song
 <script>
 
 
-let songs=document.querySelectorAll("audio");
+let songs = document.querySelectorAll("audio");
 
-let current=0;
+let current = 0;
+
+let isPlaying = false;
+
+
+/* Song names */
+
+let songNames = [
+
+"Enthara Enthara",
+"Gulmohar Malare",
+"Hey Minnale",
+"Kanave",
+"Neeyae",
+"Uyire",
+"Vaane Vaane",
+"Vennilavu Saaral"
+
+];
 
 
 
 function playSong(index){
 
 songs.forEach(song=>{
-song.pause();
-song.currentTime=0;
+    song.pause();
+    song.currentTime = 0;
 });
+
 
 songs[index].play();
 
-current=index;
+current = index;
 
-document.getElementById("status").innerHTML=
-"Playing Song "+(index+1);
+isPlaying = true;
+
+
+document.getElementById("playPauseBtn").innerHTML="⏸";
+
+
+document.getElementById("status").innerHTML =
+"Now Playing: " + songNames[index];
 
 }
+
 
 
 
@@ -350,11 +375,13 @@ function nextSong(){
 
 current++;
 
-if(current>=songs.length){
 
-current=0;
+if(current >= songs.length){
+
+current = 0;
 
 }
+
 
 playSong(current);
 
@@ -367,11 +394,13 @@ function previousSong(){
 
 current--;
 
-if(current<0){
 
-current=songs.length-1;
+if(current < 0){
+
+current = songs.length-1;
 
 }
+
 
 playSong(current);
 
@@ -380,19 +409,46 @@ playSong(current);
 
 
 
-function stopSong(){
+function playPauseSong(){
+
+
+if(isPlaying){
+
 
 songs[current].pause();
 
-songs[current].currentTime=0;
+isPlaying=false;
 
-document.getElementById("status").innerHTML=
-"Stopped";
+
+document.getElementById("playPauseBtn").innerHTML="▶️";
+
+
+document.getElementById("status").innerHTML =
+"Paused: " + songNames[current];
+
+
+}
+
+else{
+
+
+songs[current].play();
+
+isPlaying=true;
+
+
+document.getElementById("playPauseBtn").innerHTML="⏸";
+
+
+document.getElementById("status").innerHTML =
+"Now Playing: " + songNames[current];
+
 
 }
 
 
-
+}
+    
 </script>
 
 
