@@ -229,9 +229,9 @@ function loadSong(index){
 currentSong=index;
 
 
-audio.src=playlist[index].file;
+audio.pause();
 
-audio.load();
+audio.src=playlist[index].file;
 
 
 progress.value=0;
@@ -250,9 +250,9 @@ artist.innerHTML=playlist[index].artist;
 movie.innerHTML=playlist[index].movie;
 
 
+audio.load();
+
 }
-
-
 
 // Load first song
 
@@ -595,10 +595,21 @@ playSong();
 }
 
 // ==========================
-// Favorites Menu
+// Sidebar Menu
 // ==========================
 
-favoritesMenu.onclick=()=>{
+homeMenu.addEventListener("click",()=>{
+
+search.value="";
+
+buildPlaylist(playlist);
+
+});
+
+
+
+favoritesMenu.addEventListener("click",()=>{
+
 
 search.value="";
 
@@ -612,37 +623,5 @@ favorites.includes(song.title)
 
 buildPlaylist(favoriteSongs);
 
-};
-
-
-// ==========================
-// Home Menu
-// ==========================
-
-homeMenu.onclick=()=>{
-
-search.value="";
-
-
-buildPlaylist([...playlist]);
-
-};
-
-// ==========================
-// Menu Active Status
-// ==========================
-
-const menus=document.querySelectorAll(".menu");
-
-
-menus.forEach(menu=>{
-
-menu.onclick=()=>{
-
-menus.forEach(item=>item.classList.remove("active"));
-
-menu.classList.add("active");
-
-};
 
 });
