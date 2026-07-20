@@ -2,6 +2,7 @@
 // Mithun's Music Player
 // ==========================
 
+
 // Playlist
 
 const playlist = [
@@ -73,6 +74,7 @@ cover:"images/Amaran_2024.jpg"
 ];
 
 
+
 // ==========================
 // Elements
 // ==========================
@@ -106,7 +108,6 @@ const currentTimeText=document.getElementById("currentTime");
 const durationText=document.getElementById("duration");
 
 
-
 let currentSong=0;
 
 
@@ -118,11 +119,14 @@ function buildPlaylist(list){
 
 playlistContainer.innerHTML="";
 
-list.forEach((song,index)=>{
+
+list.forEach((song)=>{
+
 
 const div=document.createElement("div");
 
 div.className="song";
+
 
 div.innerHTML=`
 
@@ -140,9 +144,11 @@ div.innerHTML=`
 
 `;
 
+
+
 div.onclick=()=>{
 
-let songIndex = playlist.findIndex(item => item.title === song.title);
+let songIndex=playlist.findIndex(item=>item.title===song.title);
 
 loadSong(songIndex);
 
@@ -150,13 +156,22 @@ playSong();
 
 };
 
+
+
 playlistContainer.appendChild(div);
+
 
 });
 
+
 }
 
+
+
+// Initial playlist
+
 buildPlaylist(playlist);
+
 
 
 // ==========================
@@ -167,15 +182,18 @@ function loadSong(index){
 
 currentSong=index;
 
+
 audio.src=playlist[index].file;
 
 audio.load();
+
 
 progress.value=0;
 
 currentTimeText.innerHTML="0:00";
 
 durationText.innerHTML="0:00";
+
 
 cover.src=playlist[index].cover;
 
@@ -185,30 +203,19 @@ artist.innerHTML=playlist[index].artist;
 
 movie.innerHTML=playlist[index].movie;
 
-highlightSong();
 
 }
+
+
+
+// Load first song
 
 loadSong(0);
 
 
-// ==========================
-// Highlight Song
-// ==========================
-
-function highlightSong(){
-
-const songs=document.querySelectorAll(".song");
-
-songs.forEach(song=>song.classList.remove("active"));
-
-songs[currentSong].classList.add("active");
-
-}
-
 
 // ==========================
-// Play Song
+// Play / Pause
 // ==========================
 
 function playSong(){
@@ -220,9 +227,6 @@ playBtn.innerHTML="⏸";
 }
 
 
-// ==========================
-// Pause Song
-// ==========================
 
 function pauseSong(){
 
@@ -233,11 +237,9 @@ playBtn.innerHTML="▶️";
 }
 
 
-// ==========================
-// Play Button
-// ==========================
 
 playBtn.onclick=()=>{
+
 
 if(audio.paused){
 
@@ -251,16 +253,20 @@ pauseSong();
 
 }
 
+
 };
 
 
+
 // ==========================
-// Next
+// Next Song
 // ==========================
 
 nextBtn.onclick=()=>{
 
+
 currentSong++;
+
 
 if(currentSong>=playlist.length){
 
@@ -268,20 +274,25 @@ currentSong=0;
 
 }
 
+
 loadSong(currentSong);
 
 playSong();
 
+
 };
 
 
+
 // ==========================
-// Previous
+// Previous Song
 // ==========================
 
 prevBtn.onclick=()=>{
 
+
 currentSong--;
+
 
 if(currentSong<0){
 
@@ -289,11 +300,14 @@ currentSong=playlist.length-1;
 
 }
 
+
 loadSong(currentSong);
 
 playSong();
 
+
 };
+
 
 
 // ==========================
@@ -306,75 +320,88 @@ audio.volume=volume.value;
 
 };
 
+
+
 // ==========================
-// Progress Bar & Time Update
+// Progress Bar
 // ==========================
 
-audio.addEventListener("timeupdate", ()=>{
+audio.addEventListener("timeupdate",()=>{
+
 
 if(audio.duration){
 
-let progressPercent = (audio.currentTime / audio.duration) * 100;
 
-progress.value = progressPercent;
-
-
-// Current time display
-
-let currentMinutes = Math.floor(audio.currentTime / 60);
-
-let currentSeconds = Math.floor(audio.currentTime % 60);
-
-if(currentSeconds < 10){
-
-currentSeconds = "0" + currentSeconds;
-
-}
-
-currentTimeText.innerHTML = `${currentMinutes}:${currentSeconds}`;
+progress.value=(audio.currentTime/audio.duration)*100;
 
 
-// Duration display
 
-let durationMinutes = Math.floor(audio.duration / 60);
+let currentMinutes=Math.floor(audio.currentTime/60);
 
-let durationSeconds = Math.floor(audio.duration % 60);
+let currentSeconds=Math.floor(audio.currentTime%60);
 
-if(durationSeconds < 10){
 
-durationSeconds = "0" + durationSeconds;
+if(currentSeconds<10){
+
+currentSeconds="0"+currentSeconds;
 
 }
 
-durationText.innerHTML = `${durationMinutes}:${durationSeconds}`;
+
+currentTimeText.innerHTML=
+`${currentMinutes}:${currentSeconds}`;
+
+
+
+let durationMinutes=Math.floor(audio.duration/60);
+
+let durationSeconds=Math.floor(audio.duration%60);
+
+
+if(durationSeconds<10){
+
+durationSeconds="0"+durationSeconds;
 
 }
+
+
+durationText.innerHTML=
+`${durationMinutes}:${durationSeconds}`;
+
+
+}
+
 
 });
 
 
 
+
 // ==========================
-// Seek Song Using Progress Bar
+// Seek
 // ==========================
 
 progress.oninput=()=>{
 
+
 if(audio.duration){
 
-audio.currentTime = (progress.value / 100) * audio.duration;
+audio.currentTime=
+(progress.value/100)*audio.duration;
 
 }
+
 
 };
 
 
 
+
 // ==========================
-// Reset Progress When New Song Loads
+// Reset Progress
 // ==========================
 
-audio.addEventListener("loadedmetadata", ()=>{
+audio.addEventListener("loadedmetadata",()=>{
 
 progress.value=0;
 
@@ -382,81 +409,50 @@ progress.value=0;
 
 
 
+
 // ==========================
-// Auto Play Next Song
+// Auto Next Song
 // ==========================
 
-audio.addEventListener("ended", ()=>{
+audio.addEventListener("ended",()=>{
 
 nextBtn.click();
 
 });
 
-// Rebuild playlist with search results
-
-playlistContainer.innerHTML="";
 
 
-filteredSongs.forEach((song)=>{
 
-const div=document.createElement("div");
-
-div.className="song";
-
-div.innerHTML=`
-
-<img src="${song.cover}">
-
-<div class="song-info">
-
-<h3>${song.title}</h3>
-
-<p>${song.artist}</p>
-
-<p>${song.movie}</p>
-
-</div>
-
-`;
-
-div.onclick=()=>{
-
-let songIndex = playlist.indexOf(song);
-
-loadSong(songIndex);
-
-playSong();
-
-};
-
-
-playlistContainer.appendChild(div);
-
-
-});
-
-
-};
 // ==========================
-// Search Function
+// Search Songs
 // ==========================
 
-search.addEventListener("input", function(){
+search.addEventListener("input",()=>{
 
-let text = search.value.toLowerCase();
 
-let filtered = playlist.filter(song => {
+let text=search.value.toLowerCase();
+
+
+
+let filteredSongs=playlist.filter(song=>{
+
 
 return (
+
 song.title.toLowerCase().includes(text) ||
+
 song.movie.toLowerCase().includes(text) ||
+
 song.artist.toLowerCase().includes(text)
+
 );
+
 
 });
 
 
-buildPlaylist(filtered);
+
+buildPlaylist(filteredSongs);
 
 
 });
