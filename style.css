@@ -114,7 +114,7 @@ body{
     width: 70%;
     height: 70%;
     object-fit: cover; /* Crops and scales the image to fit perfectly */
-    object-position: center; /* Centers the image */
+    object-position:20px;
 }
 
 
