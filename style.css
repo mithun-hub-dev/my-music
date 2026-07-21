@@ -110,11 +110,11 @@ body{
     border:2px solid #1DB954;
 }
 
-.song img {
-    width: 70%;
-    height: 70%;
-    object-fit: cover;
-    object-position:20px;
+.song img{
+    width:70px;
+    height:70px;
+    object-fit:cover;
+    border-radius:10px;
 }
 
 
