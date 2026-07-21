@@ -106,6 +106,30 @@ artist:"Tamil OST",
 movie:"Ayan",
 file:"songs/Pala Palakura.mp3",
 cover:"images/Ayan.jpg"
+},
+
+{
+title:"Vaamma Duraiyamma",
+artist:"Tamil OST",
+movie:"Madrasapattinam",
+file:"songs/Vaamma Duraiyamma.mp3",
+cover:"images/Madrasapattinam.jpg"
+},
+
+{
+title:"Pookal Pookum",
+artist:"Tamil OST",
+movie:"Madrasapattinam",
+file:"songs/Pookal Pookum.mp3",
+cover:"images/Madrasapattinam.jpg"
+},
+
+{
+title:"Manmadhane Nee.mp3",
+artist:"Tamil OST",
+movie:"Manmadhan",
+file:"songs/Manmadhane Nee.mp3",
+cover:"images/Manmadhan.jpg"
 }
-  
+
 ];
