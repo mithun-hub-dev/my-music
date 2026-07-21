@@ -125,7 +125,7 @@ cover:"images/Madrasapattinam.jpg"
 },
 
 {
-title:"Manmadhane Nee.mp3",
+title:"Manmadhane Nee",
 artist:"Tamil OST",
 movie:"Manmadhan",
 file:"songs/Manmadhane Nee.mp3",
