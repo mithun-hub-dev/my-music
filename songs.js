@@ -82,6 +82,30 @@ artist:"Tamil OST",
 movie:"Jeans",
 file:"songs/Poovukkul.mp3",
 cover:"images/Jeans1998.jpg"
+},
+
+{
+title:"Nan-Pogiren",
+artist:"Tamil OST",
+movie:"Naanayam",
+file:"songs/Nan-Pogiren.mp3",
+cover:"images/Naanayam.jpg"
+},
+
+{
+title:"Orasaadha-Usurathan",
+artist:"Vivek-Mervin",
+movie:"Album",
+file:"songs/Orasaadha-Usurathan.mp3",
+cover:"images/Orasaadha.jpeg"
+},
+
+{
+title:"Pala Palakura",
+artist:"Tamil OST",
+movie:"Ayan",
+file:"songs/Pala Palakura.mp3",
+cover:"images/Ayan.jpg"
 }
   
 ];
