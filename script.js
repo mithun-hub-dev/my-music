@@ -232,6 +232,8 @@ movie.innerHTML=playlist[index].movie;
 
 audio.load();
 
+highlightCurrentSong();    
+    
 }
 
 // Load first song
