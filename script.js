@@ -55,6 +55,8 @@ let shuffleMode=false;
 
 let repeatMode=false;
 
+let currentPlaylist = playlist;
+
 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
 let recentlyPlayed =
@@ -102,7 +104,7 @@ ${isFavorite ? "❤️" : "🤍"}
 
 div.onclick=()=>{
 
-let songIndex=playlist.findIndex(item=>item.title===song.title);
+let songIndex=currentPlaylist.findIndex(item=>item.title===song.title);
 
 loadSong(songIndex);
 
@@ -159,7 +161,7 @@ function highlightCurrentSong(){
 
     document.querySelectorAll(".song").forEach(songDiv=>{
 
-        if(songDiv.dataset.title === playlist[currentSong].title){
+        if(songDiv.dataset.title === currentPlaylist[currentSong].title)
 
             songDiv.classList.add("active");
 
@@ -211,7 +213,7 @@ currentSong=index;
 
 audio.pause();
 
-audio.src=playlist[index].file;
+audio.src=currentPlaylist[index].file;
 
 
 progress.value=0;
@@ -221,13 +223,13 @@ currentTimeText.innerHTML="0:00";
 durationText.innerHTML="0:00";
 
 
-cover.src=playlist[index].cover;
+cover.src=currentPlaylist[index].cover;
 
-title.innerHTML=playlist[index].title;
+title.innerHTML=currentPlaylist[index].title;
 
-artist.innerHTML=playlist[index].artist;
+artist.innerHTML=currentPlaylist[index].artist;
 
-movie.innerHTML=playlist[index].movie;
+movie.innerHTML=currentPlaylist[index].movie;
 
 
 audio.load();
@@ -554,7 +556,7 @@ let randomSong;
 
 do{
 
-randomSong=Math.floor(Math.random()*playlist.length);
+randomSong=Math.floor(Math.random()*currentPlaylist.length);
 
 }
 while(randomSong===currentSong);
@@ -572,7 +574,7 @@ else{
 currentSong++;
 
 
-if(currentSong>=playlist.length){
+if(currentSong>=currentPlaylist.length){
 
 currentSong=0;
 
@@ -604,7 +606,13 @@ favorites.includes(song.title)
 
 );
 
-buildPlaylist(favoriteSongs);
+currentPlaylist=favoriteSongs;
+
+currentSong=0;
+
+buildPlaylist(currentPlaylist);
+
+loadSong(0);
 
 });
 
@@ -616,7 +624,13 @@ recentMenu.addEventListener("click",()=>{
 
 search.value="";
 
-buildPlaylist(recentlyPlayed);
+currentPlaylist=recentlyPlayed;
+
+currentSong=0;
+
+buildPlaylist(currentPlaylist);
+
+loadSong(0);
 
 });
 
@@ -628,7 +642,13 @@ playlistMenu.addEventListener("click",()=>{
 
 search.value="";
 
-buildPlaylist(playlist);
+currentPlaylist = playlist;
+
+currentSong=0;
+
+buildPlaylist(currentPlaylist);
+
+loadSong(0);
 
 });
 
@@ -636,11 +656,15 @@ ilaiyarajaMenu.addEventListener("click",()=>{
 
     search.value="";
 
-    const ilaiSongs = playlist.filter(song =>
+    currentPlaylist = playlist.filter(song =>
         song.category === "Ilaiyaraaja"
     );
 
-    buildPlaylist(ilaiSongs);
+    currentSong=0;
+
+    buildPlaylist(currentPlaylist);
+
+    loadSong(0);
 
 });
 
