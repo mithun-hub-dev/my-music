@@ -691,3 +691,44 @@ menu.classList.add("active");
 });
 
 });
+
+// ==========================
+// IST Date & Time Clock
+// ==========================
+
+function updateDateTime(){
+
+const now = new Date();
+
+const options = {
+    timeZone:"Asia/Kolkata",
+    day:"2-digit",
+    month:"short",
+    year:"numeric",
+    hour:"2-digit",
+    minute:"2-digit",
+    second:"2-digit",
+    hour12:false
+};
+
+
+let istTime = now.toLocaleString("en-IN", options);
+
+
+let parts = istTime.split(",");
+
+
+let date = parts[0];
+
+let time = parts[1];
+
+
+document.getElementById("dateTime").innerHTML =
+`${date} ${time} IST`;
+
+}
+
+
+updateDateTime();
+
+setInterval(updateDateTime,1000);
