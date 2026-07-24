@@ -60,24 +60,35 @@ body{
 /* Main */
 
 .main{
+
     padding:30px;
+
+    height:100vh;
+
     overflow-y:auto;
+
+    overflow-x:hidden;
+
 }
 
 .topbar{
 
-    margin-bottom:30px;
-
     position:sticky;
+
     top:0;
+
     z-index:1000;
 
-    background:#111;
+    background:#121212;
 
-    padding:10px;
+    padding:10px 0;
+
+    margin-bottom:30px;
 
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
 
 }
@@ -317,6 +328,10 @@ body{
 
     padding:15px;
 
+    height:auto;
+
+    overflow:visible;
+
 }
 
 /* Songs */
@@ -407,11 +422,9 @@ margin-left:15px;
 
 .topbar{
 
-    flex-direction:column;
+    position:sticky;
 
-    align-items:stretch;
-
-    gap:8px;
+    top:0;
 
 }
 
