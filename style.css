@@ -411,11 +411,13 @@ body{
 
 #dateTime{
 
-font-size:14px;
+font-size:13px;
 color:#aaa;
 white-space:nowrap;
 margin-left:15px;
-    
+text-align:center;
+line-height:1.5;
+
 }
 
 @media(max-width:600px){
