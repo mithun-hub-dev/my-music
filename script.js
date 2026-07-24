@@ -573,6 +573,18 @@ buildPlaylist(playlist);
 
 });
 
+ilaiyarajaMenu.addEventListener("click",()=>{
+
+    search.value="";
+
+    const ilaiSongs = playlist.filter(song =>
+        song.category === "Ilaiyaraaja"
+    );
+
+    buildPlaylist(ilaiSongs);
+
+});
+
 // ==========================
 // Active Menu Highlight
 // ==========================
