@@ -700,11 +700,17 @@ function updateDateTime(){
 
 const now = new Date();
 
-const options = {
+
+const dateOptions = {
     timeZone:"Asia/Kolkata",
     day:"2-digit",
     month:"short",
-    year:"numeric",
+    year:"numeric"
+};
+
+
+const timeOptions = {
+    timeZone:"Asia/Kolkata",
     hour:"2-digit",
     minute:"2-digit",
     second:"2-digit",
@@ -712,19 +718,24 @@ const options = {
 };
 
 
-let istTime = now.toLocaleString("en-IN", options);
+let date = now.toLocaleDateString("en-IN", dateOptions);
+
+let time = now.toLocaleTimeString("en-IN", timeOptions);
 
 
-let parts = istTime.split(",");
+// Convert month to uppercase
 
-
-let date = parts[0];
-
-let time = parts[1];
+date = date.replace(
+    /[a-zA-Z]+/,
+    month => month.toUpperCase()
+);
 
 
 document.getElementById("dateTime").innerHTML =
-`${date} ${time} IST`;
+`
+<div>${date}</div>
+<div>${time} IST</div>
+`;
 
 }
 
