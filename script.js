@@ -75,7 +75,7 @@ list.forEach((song)=>{
 const div=document.createElement("div");
 
 div.className="song";
-
+div.dataset.title = song.title;
 
 let isFavorite = favorites.includes(song.title);
 
@@ -157,15 +157,13 @@ buildPlaylist(list);
 
 function highlightCurrentSong(){
 
-    document.querySelectorAll(".song").forEach((songDiv,index)=>{
+    document.querySelectorAll(".song").forEach(songDiv=>{
 
-        if(index===currentSong){
+        if(songDiv.dataset.title === playlist[currentSong].title){
 
             songDiv.classList.add("active");
 
-        }
-
-        else{
+        }else{
 
             songDiv.classList.remove("active");
 
