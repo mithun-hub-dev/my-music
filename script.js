@@ -45,6 +45,8 @@ const homeMenu=document.getElementById("homeMenu");
 
 const playlistMenu=document.getElementById("playlistMenu");
 
+const ilaiyarajaMenu=document.getElementById("ilaiyarajaMenu");
+
 const sectionTitle=document.getElementById("sectionTitle");
 
 let currentSong=0;
