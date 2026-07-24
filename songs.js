@@ -130,6 +130,60 @@ artist:"Tamil OST",
 movie:"Manmadhan",
 file:"songs/Manmadhane Nee.mp3",
 cover:"images/Manmadhan.jpg"
-}
+},
 
+{
+title:"Thendral Vanthu",
+artist:"Ilaiyaraaja",
+category:"Ilaiyaraaja",
+movie:"Avatharam",
+file:"songs/Thendral Vanthu.mp3",
+cover:"images/Avatharam.jpg"
+},
+
+{
+title:"Maalayil-Yaro",
+artist:"Ilaiyaraaja",
+category:"Ilaiyaraaja",
+movie:"Chatriyan",
+file:"songs/Maalayil-Yaro.mp3",
+cover:"images/Chatriyan.jpg"
+},
+
+{
+title:"Endhan-Nenjil",
+artist:"Ilaiyaraaja",
+category:"Ilaiyaraaja",
+movie:"Kalaignan",
+file:"songs/Endhan-Nenjil.mp3",
+cover:"images/Kalaignan.jpg"
+},
+
+{
+title:"Maanguyile Poonguyile",
+artist:"Ilaiyaraaja",
+category:"Ilaiyaraaja",
+movie:"Karagattakaran",
+file:"songs/Maanguyile Poonguyile.mp3",
+cover:"images/Karagattakaran.jpg"
+},
+
+{
+title:"Pachamala Poovu",
+artist:"Ilaiyaraaja",
+category:"Ilaiyaraaja",
+movie:"Kizhakku Vaasal",
+file:"songs/Pachamala Poovu.mp3",
+cover:"images/Kizhakku Vaasal.jpg"
+},
+
+{
+title:"Raja Raja Chozhan Naan",
+artist:"Ilaiyaraaja",
+category:"Ilaiyaraaja",
+movie:"Rettai Vaal Kuruvi",
+file:"songs/Raja Raja Chozhan Naan.mp3",
+cover:"images/Rettai Vaal Kuruvi.jpg"
+}  
+  
 ];
