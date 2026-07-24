@@ -151,7 +151,29 @@ buildPlaylist(list);
 
 }
 
+// ==========================
+// Highlight Current Song
+// ==========================
 
+function highlightCurrentSong(){
+
+    document.querySelectorAll(".song").forEach((songDiv,index)=>{
+
+        if(index===currentSong){
+
+            songDiv.classList.add("active");
+
+        }
+
+        else{
+
+            songDiv.classList.remove("active");
+
+        }
+
+    });
+
+}
 
 // Initial playlist
 
