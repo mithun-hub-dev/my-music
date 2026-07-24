@@ -60,6 +60,8 @@ let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 let recentlyPlayed =
 JSON.parse(localStorage.getItem("recentlyPlayed")) || [];
 
+let lastPlayedTitle = "";
+
 // ==========================
 // Build Playlist
 // ==========================
@@ -228,8 +230,13 @@ audio.play()
 
 playBtn.innerHTML="⏸";
 
-// Save to Recent Activity
-addToRecentlyPlayed(playlist[currentSong]);
+if(lastPlayedTitle !== playlist[currentSong].title){
+
+    addToRecentlyPlayed(playlist[currentSong]);
+
+    lastPlayedTitle = playlist[currentSong].title;
+
+}
 
 })
 .catch(error=>{
@@ -579,6 +586,17 @@ buildPlaylist(favoriteSongs);
 
 });
 
+// ==========================
+// Recent Activity
+// ==========================
+
+recentMenu.addEventListener("click",()=>{
+
+search.value="";
+
+buildPlaylist(recentlyPlayed);
+
+});
 
 // ==========================
 // Playlist Menu
