@@ -161,7 +161,7 @@ function highlightCurrentSong(){
 
     document.querySelectorAll(".song").forEach(songDiv=>{
 
-        if(songDiv.dataset.title === currentPlaylist[currentSong].title)
+        if(songDiv.dataset.title === currentPlaylist[currentSong].title){
 
             songDiv.classList.add("active");
 
@@ -172,6 +172,8 @@ function highlightCurrentSong(){
         }
 
     });
+
+}
 
 }
 
@@ -254,11 +256,11 @@ audio.play()
 
 playBtn.innerHTML="⏸";
 
-if(lastPlayedTitle !== playlist[currentSong].title){
+if(lastPlayedTitle !== currentPlaylist[currentSong].title){
 
-    addToRecentlyPlayed(playlist[currentSong]);
+    addToRecentlyPlayed(currentPlaylist[currentSong]);
 
-    lastPlayedTitle = playlist[currentSong].title;
+    lastPlayedTitle = currentPlaylist[currentSong].title;
 
 }
 
@@ -321,7 +323,7 @@ currentSong--;
 
 if(currentSong<0){
 
-currentSong=playlist.length-1;
+currentSong=currentPlaylist.length-1;
 
 }
 
@@ -457,7 +459,7 @@ search.addEventListener("input",()=>{
 let text = search.value.toLowerCase();
 
 
-let filteredSongs = playlist.filter(song=>{
+let filteredSongs = currentPlaylist.filter(song=>{
 
 return (
 
