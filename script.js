@@ -175,8 +175,6 @@ function highlightCurrentSong(){
 
 }
 
-}
-
 // Initial playlist
 
 buildPlaylist(playlist);
