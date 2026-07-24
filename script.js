@@ -45,6 +45,8 @@ const playlistMenu=document.getElementById("playlistMenu");
 
 const ilaiyarajaMenu=document.getElementById("ilaiyarajaMenu");
 
+const recentMenu=document.getElementById("recentMenu");
+
 const sectionTitle=document.getElementById("sectionTitle");
 
 let currentSong=0;
@@ -54,6 +56,9 @@ let shuffleMode=false;
 let repeatMode=false;
 
 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+let recentlyPlayed =
+JSON.parse(localStorage.getItem("recentlyPlayed")) || [];
 
 // ==========================
 // Build Playlist
@@ -150,7 +155,28 @@ buildPlaylist(list);
 
 buildPlaylist(playlist);
 
+// ==========================
+// Recently Played
+// ==========================
 
+function addToRecentlyPlayed(song){
+
+    recentlyPlayed = recentlyPlayed.filter(item =>
+        item.title !== song.title
+    );
+
+    recentlyPlayed.unshift(song);
+
+    if(recentlyPlayed.length > 20){
+        recentlyPlayed.pop();
+    }
+
+    localStorage.setItem(
+        "recentlyPlayed",
+        JSON.stringify(recentlyPlayed)
+    );
+
+}
 
 // ==========================
 // Load Song
