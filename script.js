@@ -41,8 +41,6 @@ const durationText=document.getElementById("duration");
 
 const favoritesMenu=document.getElementById("favoritesMenu");
 
-const homeMenu=document.getElementById("homeMenu");
-
 const playlistMenu=document.getElementById("playlistMenu");
 
 const ilaiyarajaMenu=document.getElementById("ilaiyarajaMenu");
@@ -536,14 +534,6 @@ playSong();
 // ==========================
 // Sidebar Menu
 // ==========================
-
-homeMenu.addEventListener("click",()=>{
-
-search.value="";
-
-buildPlaylist(playlist);
-
-});
 
 
 favoritesMenu.addEventListener("click",()=>{
