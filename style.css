@@ -65,17 +65,33 @@ body{
 }
 
 .topbar{
+
     margin-bottom:30px;
+
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    background:#111;
+
+    padding:10px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
 }
 
 #search{
-    width:100%;
+
+    flex:1;
     padding:15px;
     border:none;
     border-radius:30px;
     background:#1f1f1f;
     color:white;
     font-size:16px;
+
 }
 
 .section-title{
@@ -369,6 +385,42 @@ body{
 
     width:65px;
     height:65px;
+
+}
+
+}
+
+/* ==========================
+   Sticky Search + Clock Bar
+   ========================== */
+
+#dateTime{
+
+font-size:14px;
+color:#aaa;
+white-space:nowrap;
+margin-left:15px;
+    
+}
+
+@media(max-width:600px){
+
+.topbar{
+
+    flex-direction:column;
+
+    align-items:stretch;
+
+    gap:8px;
+
+}
+
+
+#dateTime{
+
+    font-size:12px;
+
+    text-align:center;
 
 }
 
