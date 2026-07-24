@@ -228,6 +228,9 @@ audio.play()
 
 playBtn.innerHTML="⏸";
 
+// Save to Recent Activity
+addToRecentlyPlayed(playlist[currentSong]);
+
 })
 .catch(error=>{
 
