@@ -442,3 +442,76 @@ line-height:1.5;
 }
 
 }
+
+/* ==========================
+    Radio Stations
+========================== */
+
+.radio-section{
+    margin-top:40px;
+    padding-bottom:30px;
+}
+
+.radio-stations{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:15px;
+}
+
+.radio-btn{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    width:100%;
+    padding:18px 20px;
+    border:none;
+    border-radius:15px;
+    background:#181818;
+    color:white;
+    font-family:'Poppins',sans-serif;
+    font-size:15px;
+    cursor:pointer;
+    transition:.3s;
+    text-align:left;
+}
+
+.radio-btn span{
+    color:#999;
+    font-size:13px;
+    margin-left:10px;
+}
+
+.radio-btn:hover{
+    background:#282828;
+    transform:translateY(-3px);
+}
+
+.radio-btn.active{
+    background:#1DB954;
+    color:black;
+    box-shadow:0 8px 20px rgba(29,185,84,.25);
+}
+
+.radio-btn.active span{
+    color:#111;
+}
+
+/* Mobile Radio */
+
+@media(max-width:600px){
+
+    .radio-stations{
+        grid-template-columns:1fr;
+        gap:12px;
+    }
+
+    .radio-btn{
+        padding:16px;
+        font-size:14px;
+    }
+
+    .radio-btn span{
+        font-size:12px;
+    }
+
+}
