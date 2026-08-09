@@ -743,3 +743,177 @@ document.getElementById("dateTime").innerHTML =
 updateDateTime();
 
 setInterval(updateDateTime,1000);
+
+// ==========================
+// Radio Stations
+// ==========================
+
+const radioButtons = document.querySelectorAll(".radio-btn");
+
+const radioStations = {
+
+    radiocity: {
+        name: "Radio City",
+        frequency: "91.1 FM",
+        stream: ""
+    },
+
+    suryan: {
+        name: "Suryan FM",
+        frequency: "93.5 FM",
+        stream: ""
+    },
+
+    kovaifm: {
+        name: "Kovai FM",
+        frequency: "95.5 FM",
+        stream: ""
+    },
+
+    mirchi: {
+        name: "Radio Mirchi",
+        frequency: "98.3 FM",
+        stream: ""
+    },
+
+    airrainbow: {
+        name: "AIR FM Rainbow",
+        frequency: "103.0 MHz",
+        stream: ""
+    },
+
+    hellofm: {
+        name: "Hello FM",
+        frequency: "106.4 FM",
+        stream: ""
+    }
+
+};
+
+let currentRadio = null;
+
+
+// ==========================
+// Play Radio
+// ==========================
+
+function playRadio(stationId){
+
+    const station = radioStations[stationId];
+
+    if(!station || !station.stream){
+
+        console.log(
+            "Radio stream URL not added yet:",
+            station.name
+        );
+
+        return;
+
+    }
+
+    // Stop current song/radio
+
+    audio.pause();
+
+    // Set radio stream
+
+    audio.src = station.stream;
+
+    audio.load();
+
+    audio.play()
+    .then(()=>{
+
+        currentRadio = stationId;
+
+        playBtn.innerHTML = "⏸";
+
+        // Update player information
+
+        title.innerHTML = station.name;
+
+        artist.innerHTML = "Live Radio";
+
+        movie.innerHTML = station.frequency;
+
+        // Highlight active radio
+
+        radioButtons.forEach(button=>{
+
+            button.classList.remove("active");
+
+        });
+
+        const activeButton =
+            document.querySelector(
+                `.radio-btn[data-radio="${stationId}"]`
+            );
+
+        if(activeButton){
+
+            activeButton.classList.add("active");
+
+            activeButton.innerHTML =
+                `⏸️ ${station.name}
+                 <span>${station.frequency}</span>`;
+
+        }
+
+    })
+    .catch(error=>{
+
+        console.error(
+            "Radio playback failed:",
+            error
+        );
+
+    });
+
+}
+
+
+// ==========================
+// Radio Button Click
+// ==========================
+
+radioButtons.forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        const stationId =
+            button.dataset.radio;
+
+        // Same station → pause
+
+        if(currentRadio === stationId && !audio.paused){
+
+            audio.pause();
+
+            playBtn.innerHTML = "▶️";
+
+            return;
+
+        }
+
+        // Restore all radio buttons
+
+        radioButtons.forEach(btn=>{
+
+            const id = btn.dataset.radio;
+
+            const station = radioStations[id];
+
+            btn.classList.remove("active");
+
+            btn.innerHTML =
+                `▶️ ${station.name}
+                 <span>${station.frequency}</span>`;
+
+        });
+
+        playRadio(stationId);
+
+    });
+
+});
