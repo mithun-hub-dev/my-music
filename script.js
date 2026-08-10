@@ -245,7 +245,6 @@ function loadSong(index){
 loadSong(0);
 
 
-```js
 // ==========================
 // Play / Pause
 // ==========================
@@ -352,7 +351,7 @@ playBtn.onclick=()=>{
     }
 
 };
-```
+
 
 // ==========================
 // Next Song
@@ -799,7 +798,7 @@ updateDateTime();
 
 setInterval(updateDateTime,1000);
 
-```js
+
 // ==========================
 // Radio Stations
 // ==========================
@@ -1100,4 +1099,3 @@ function stopRadio(){
     }
 
 }
-```
