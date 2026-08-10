@@ -55,8 +55,6 @@ let shuffleMode=false;
 
 let repeatMode=false;
 
-let currentRadio = null;
-
 let currentPlaylist = playlist;
 
 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -84,7 +82,7 @@ div.dataset.title = song.title;
 let isFavorite = favorites.includes(song.title);
 
 
-div.innerHTML=
+div.innerHTML=`
 
 <img src="${song.cover}">
 
@@ -102,7 +100,7 @@ div.innerHTML=
 ${isFavorite ? "❤️" : "🤍"}
 </button>
 
-;
+`;
 
 div.onclick=()=>{
 
@@ -210,36 +208,34 @@ function addToRecentlyPlayed(song){
 
 function loadSong(index){
 
-    if(currentRadio !== null){
+currentSong=index;
 
-        stopRadio();
 
-    }
+audio.pause();
 
-    currentSong=index;
+audio.src=currentPlaylist[index].file;
 
-    audio.pause();
 
-    audio.src=currentPlaylist[index].file;
+progress.value=0;
 
-    progress.value=0;
+currentTimeText.innerHTML="0:00";
 
-    currentTimeText.innerHTML="0:00";
+durationText.innerHTML="0:00";
 
-    durationText.innerHTML="0:00";
 
-    cover.src=currentPlaylist[index].cover;
+cover.src=currentPlaylist[index].cover;
 
-    title.innerHTML=currentPlaylist[index].title;
+title.innerHTML=currentPlaylist[index].title;
 
-    artist.innerHTML=currentPlaylist[index].artist;
+artist.innerHTML=currentPlaylist[index].artist;
 
-    movie.innerHTML=currentPlaylist[index].movie;
+movie.innerHTML=currentPlaylist[index].movie;
 
-    audio.load();
 
-    highlightCurrentSong();
+audio.load();
 
+highlightCurrentSong();    
+    
 }
 
 // Load first song
@@ -253,107 +249,55 @@ loadSong(0);
 
 function playSong(){
 
-    // Normal song playback
+audio.play()
+.then(()=>{
 
-    audio.play()
-    .then(()=>{
+playBtn.innerHTML="⏸";
 
-        playBtn.innerHTML="⏸";
+if(lastPlayedTitle !== currentPlaylist[currentSong].title){
 
-        if(
-            lastPlayedTitle !==
-            currentPlaylist[currentSong].title
-        ){
+    addToRecentlyPlayed(currentPlaylist[currentSong]);
 
-            addToRecentlyPlayed(
-                currentPlaylist[currentSong]
-            );
-
-            lastPlayedTitle =
-                currentPlaylist[currentSong].title;
-
-        }
-
-    })
-    .catch(error=>{
-
-        console.log(
-            "Playback interrupted:",
-            error
-        );
-
-    });
+    lastPlayedTitle = currentPlaylist[currentSong].title;
 
 }
 
+})
+.catch(error=>{
+
+console.log("Playback interrupted");
+
+});
+
+}
 
 function pauseSong(){
 
-    audio.pause();
+audio.pause();
 
-    playBtn.innerHTML="▶️";
+playBtn.innerHTML="▶️";
 
 }
 
 
-// ==========================
-// Main Play Button
-// ==========================
 
 playBtn.onclick=()=>{
 
-    // RADIO MODE
 
-    if(currentRadio !== null){
+if(audio.paused){
 
-        if(audio.paused){
+playSong();
 
-            audio.play()
-            .then(()=>{
+}
 
-                playBtn.innerHTML="⏸";
+else{
 
-            })
-            .catch(error=>{
+pauseSong();
 
-                console.error(
-                    "Radio resume failed:",
-                    error
-                );
+}
 
-            });
-
-        }
-
-        else{
-
-            audio.pause();
-
-            playBtn.innerHTML="▶️";
-
-        }
-
-        return;
-
-    }
-
-
-    // NORMAL SONG MODE
-
-    if(audio.paused){
-
-        playSong();
-
-    }
-
-    else{
-
-        pauseSong();
-
-    }
 
 };
-
 
 // ==========================
 // Next Song
@@ -429,7 +373,7 @@ currentSeconds="0"+currentSeconds;
 }
 
 
-currentTimeText.innerHTML =
+currentTimeText.innerHTML=
 `${currentMinutes}:${currentSeconds}`;
 
 
@@ -446,7 +390,7 @@ durationSeconds="0"+durationSeconds;
 }
 
 
-durationText.innerHTML =
+durationText.innerHTML=
 `${durationMinutes}:${durationSeconds}`;
 
 
@@ -788,7 +732,10 @@ date = date.replace(
 
 
 document.getElementById("dateTime").innerHTML =
-    `${date} | ${time}`;
+`
+<div>${date}</div>
+<div>${time} IST</div>
+`;
 
 }
 
@@ -796,226 +743,3 @@ document.getElementById("dateTime").innerHTML =
 updateDateTime();
 
 setInterval(updateDateTime,1000);
-
-
-// ==========================
-// Radio Stations
-// ==========================
-
-const radioButtons = document.querySelectorAll(".radio-btn");
-
-const radioStations = {
-
-    radiocity: {
-        name: "Radio City",
-        frequency: "91.1 FM",
-        stream: "http://104.238.193.114:7077/;stream.mp3"
-    },
-
-    suryan: {
-        name: "Suryan FM",
-        frequency: "93.5 FM",
-        stream: "http://31.14.40.149:8000/;stream.mp3"
-    },
-
-    kovaifm: {
-        name: "Kovai FM",
-        frequency: "95.5 FM",
-        stream: ""
-    },
-
-    mirchi: {
-        name: "Radio Mirchi",
-        frequency: "98.3 FM",
-        stream: "http://163.172.158.94:8052/;stream.mp3"
-    },
-
-    airrainbow: {
-        name: "AIR FM Rainbow",
-        frequency: "103.0 MHz",
-        stream: "http://163.172.158.94:8066/;stream.mp3"
-    },
-
-    hellofm: {
-        name: "Hello FM",
-        frequency: "106.4 FM",
-        stream: "http://163.172.158.94:8048/;stream.mp3"
-    }
-
-};
-
-
-// ==========================
-// Play Radio
-// ==========================
-
-function playRadio(stationId){
-
-    const station = radioStations[stationId];
-
-    if(!station){
-
-        console.error("Radio station not found:", stationId);
-
-        return;
-
-    }
-
-
-    // No stream available
-
-    if(!station.stream){
-
-        alert(
-            station.name +
-            " stream is not available right now."
-        );
-
-        return;
-
-    }
-
-
-    // Stop current audio
-
-    audio.pause();
-
-
-    // Load radio stream
-
-    audio.src = station.stream;
-
-    audio.load();
-
-
-    audio.play()
-    .then(()=>{
-
-        currentRadio = stationId;
-
-        // Change player button
-
-        playBtn.innerHTML = "⏸";
-
-
-        // Update player information
-
-        title.innerHTML = station.name;
-
-        artist.innerHTML = "Live Radio";
-
-        movie.innerHTML = station.frequency;
-
-
-        // Reset progress because radio is live
-
-        progress.value = 0;
-
-        currentTimeText.innerHTML = "LIVE";
-
-        durationText.innerHTML = "LIVE";
-
-
-        // Remove active state from all buttons
-
-        radioButtons.forEach(button=>{
-
-            button.classList.remove("active");
-
-        });
-
-
-        // Highlight selected radio
-
-        const activeButton =
-    document.querySelector(
-        `.radio-btn[data-radio="${stationId}"]`
-    );
-
-
-        if(activeButton){
-
-            activeButton.classList.add("active");
-
-            activeButton.innerHTML =
-    `⏸️ ${station.name}
-     <span>${station.frequency}</span>`;
-
-        }
-
-    })
-
-    .catch(error=>{
-
-        console.error(
-            "Radio playback failed:",
-            error
-        );
-
-        alert(
-            "Unable to play " +
-            station.name +
-            ". The stream may be offline."
-        );
-
-    });
-
-}
-
-
-// ==========================
-// Radio Button Click
-// ==========================
-
-radioButtons.forEach(button=>{
-
-    button.addEventListener("click",()=>{
-
-        const stationId =
-            button.dataset.radio;
-
-
-        // Same radio → Pause
-
-        if(
-            currentRadio === stationId &&
-            !audio.paused
-        ){
-
-            audio.pause();
-
-            playBtn.innerHTML = "▶️";
-
-            return;
-
-        }
-
-
-        // Restore all radio buttons
-
-        radioButtons.forEach(btn=>{
-
-            const id =
-                btn.dataset.radio;
-
-            const station =
-                radioStations[id];
-
-
-            btn.classList.remove("active");
-
-
-            btn.innerHTML =
-    `▶️ ${station.name}
-     <span>${station.frequency}</span>`;
-
-        });
-
-
-        // Play selected radio
-
-        playRadio(stationId);
-
-    });
-
-});
