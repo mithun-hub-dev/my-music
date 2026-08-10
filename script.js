@@ -208,34 +208,36 @@ function addToRecentlyPlayed(song){
 
 function loadSong(index){
 
-currentSong=index;
+    if(typeof currentRadio !== "undefined"){
 
+        stopRadio();
 
-audio.pause();
+    }
 
-audio.src=currentPlaylist[index].file;
+    currentSong=index;
 
+    audio.pause();
 
-progress.value=0;
+    audio.src=currentPlaylist[index].file;
 
-currentTimeText.innerHTML="0:00";
+    progress.value=0;
 
-durationText.innerHTML="0:00";
+    currentTimeText.innerHTML="0:00";
 
+    durationText.innerHTML="0:00";
 
-cover.src=currentPlaylist[index].cover;
+    cover.src=currentPlaylist[index].cover;
 
-title.innerHTML=currentPlaylist[index].title;
+    title.innerHTML=currentPlaylist[index].title;
 
-artist.innerHTML=currentPlaylist[index].artist;
+    artist.innerHTML=currentPlaylist[index].artist;
 
-movie.innerHTML=currentPlaylist[index].movie;
+    movie.innerHTML=currentPlaylist[index].movie;
 
+    audio.load();
 
-audio.load();
+    highlightCurrentSong();
 
-highlightCurrentSong();    
-    
 }
 
 // Load first song
@@ -243,61 +245,114 @@ highlightCurrentSong();
 loadSong(0);
 
 
+```js
 // ==========================
 // Play / Pause
 // ==========================
 
 function playSong(){
 
-audio.play()
-.then(()=>{
+    // Normal song playback
 
-playBtn.innerHTML="⏸";
+    audio.play()
+    .then(()=>{
 
-if(lastPlayedTitle !== currentPlaylist[currentSong].title){
+        playBtn.innerHTML="⏸";
 
-    addToRecentlyPlayed(currentPlaylist[currentSong]);
+        if(
+            lastPlayedTitle !==
+            currentPlaylist[currentSong].title
+        ){
 
-    lastPlayedTitle = currentPlaylist[currentSong].title;
+            addToRecentlyPlayed(
+                currentPlaylist[currentSong]
+            );
+
+            lastPlayedTitle =
+                currentPlaylist[currentSong].title;
+
+        }
+
+    })
+    .catch(error=>{
+
+        console.log(
+            "Playback interrupted:",
+            error
+        );
+
+    });
 
 }
 
-})
-.catch(error=>{
-
-console.log("Playback interrupted");
-
-});
-
-}
 
 function pauseSong(){
 
-audio.pause();
+    audio.pause();
 
-playBtn.innerHTML="▶️";
+    playBtn.innerHTML="▶️";
 
 }
 
 
+// ==========================
+// Main Play Button
+// ==========================
 
 playBtn.onclick=()=>{
 
+    // RADIO MODE
 
-if(audio.paused){
+    if(currentRadio !== null){
 
-playSong();
+        if(audio.paused){
 
-}
+            audio.play()
+            .then(()=>{
 
-else{
+                playBtn.innerHTML="⏸";
 
-pauseSong();
+            })
+            .catch(error=>{
 
-}
+                console.error(
+                    "Radio resume failed:",
+                    error
+                );
 
+            });
+
+        }
+
+        else{
+
+            audio.pause();
+
+            playBtn.innerHTML="▶️";
+
+        }
+
+        return;
+
+    }
+
+
+    // NORMAL SONG MODE
+
+    if(audio.paused){
+
+        playSong();
+
+    }
+
+    else{
+
+        pauseSong();
+
+    }
 
 };
+```
 
 // ==========================
 // Next Song
@@ -744,6 +799,7 @@ updateDateTime();
 
 setInterval(updateDateTime,1000);
 
+```js
 // ==========================
 // Radio Stations
 // ==========================
@@ -755,13 +811,13 @@ const radioStations = {
     radiocity: {
         name: "Radio City",
         frequency: "91.1 FM",
-        stream: ""
+        stream: "http://104.238.193.114:7077/;stream.mp3"
     },
 
     suryan: {
         name: "Suryan FM",
         frequency: "93.5 FM",
-        stream: ""
+        stream: "http://31.14.40.149:8000/;stream.mp3"
     },
 
     kovaifm: {
@@ -773,19 +829,19 @@ const radioStations = {
     mirchi: {
         name: "Radio Mirchi",
         frequency: "98.3 FM",
-        stream: ""
+        stream: "http://163.172.158.94:8052/;stream.mp3"
     },
 
     airrainbow: {
         name: "AIR FM Rainbow",
         frequency: "103.0 MHz",
-        stream: ""
+        stream: "http://163.172.158.94:8066/;stream.mp3"
     },
 
     hellofm: {
         name: "Hello FM",
         frequency: "106.4 FM",
-        stream: ""
+        stream: "http://163.172.158.94:8048/;stream.mp3"
     }
 
 };
@@ -801,33 +857,50 @@ function playRadio(stationId){
 
     const station = radioStations[stationId];
 
-    if(!station || !station.stream){
+    if(!station){
 
-        console.log(
-            "Radio stream URL not added yet:",
-            station.name
+        console.error("Radio station not found:", stationId);
+
+        return;
+
+    }
+
+
+    // No stream available
+
+    if(!station.stream){
+
+        alert(
+            station.name +
+            " stream is not available right now."
         );
 
         return;
 
     }
 
-    // Stop current song/radio
+
+    // Stop current audio
 
     audio.pause();
 
-    // Set radio stream
+
+    // Load radio stream
 
     audio.src = station.stream;
 
     audio.load();
+
 
     audio.play()
     .then(()=>{
 
         currentRadio = stationId;
 
+        // Change player button
+
         playBtn.innerHTML = "⏸";
+
 
         // Update player information
 
@@ -837,7 +910,17 @@ function playRadio(stationId){
 
         movie.innerHTML = station.frequency;
 
-        // Highlight active radio
+
+        // Reset progress because radio is live
+
+        progress.value = 0;
+
+        currentTimeText.innerHTML = "LIVE";
+
+        durationText.innerHTML = "LIVE";
+
+
+        // Remove active state from all buttons
 
         radioButtons.forEach(button=>{
 
@@ -845,10 +928,14 @@ function playRadio(stationId){
 
         });
 
+
+        // Highlight selected radio
+
         const activeButton =
             document.querySelector(
                 `.radio-btn[data-radio="${stationId}"]`
             );
+
 
         if(activeButton){
 
@@ -861,11 +948,18 @@ function playRadio(stationId){
         }
 
     })
+
     .catch(error=>{
 
         console.error(
             "Radio playback failed:",
             error
+        );
+
+        alert(
+            "Unable to play " +
+            station.name +
+            ". The stream may be offline."
         );
 
     });
@@ -884,9 +978,13 @@ radioButtons.forEach(button=>{
         const stationId =
             button.dataset.radio;
 
-        // Same station → pause
 
-        if(currentRadio === stationId && !audio.paused){
+        // Same radio → Pause
+
+        if(
+            currentRadio === stationId &&
+            !audio.paused
+        ){
 
             audio.pause();
 
@@ -896,15 +994,20 @@ radioButtons.forEach(button=>{
 
         }
 
+
         // Restore all radio buttons
 
         radioButtons.forEach(btn=>{
 
-            const id = btn.dataset.radio;
+            const id =
+                btn.dataset.radio;
 
-            const station = radioStations[id];
+            const station =
+                radioStations[id];
+
 
             btn.classList.remove("active");
+
 
             btn.innerHTML =
                 `▶️ ${station.name}
@@ -912,8 +1015,89 @@ radioButtons.forEach(button=>{
 
         });
 
+
+        // Play selected radio
+
         playRadio(stationId);
 
     });
 
 });
+
+
+// ==========================
+// Radio / Song Play Button
+// ==========================
+
+playBtn.addEventListener("click",()=>{
+
+    // If radio is currently selected
+
+    if(currentRadio){
+
+        if(audio.paused){
+
+            audio.play()
+            .then(()=>{
+
+                playBtn.innerHTML = "⏸";
+
+            })
+            .catch(error=>{
+
+                console.error(
+                    "Radio resume failed:",
+                    error
+                );
+
+            });
+
+        }
+
+        else{
+
+            audio.pause();
+
+            playBtn.innerHTML = "▶️";
+
+        }
+
+        return;
+
+    }
+
+});
+
+
+// ==========================
+// Stop Radio When Selecting Song
+// ==========================
+
+function stopRadio(){
+
+    if(currentRadio !== null){
+
+        currentRadio = null;
+
+        radioButtons.forEach(btn=>{
+
+            const id =
+                btn.dataset.radio;
+
+            const station =
+                radioStations[id];
+
+
+            btn.classList.remove("active");
+
+
+            btn.innerHTML =
+                `▶️ ${station.name}
+                 <span>${station.frequency}</span>`;
+
+        });
+
+    }
+
+}
+```
