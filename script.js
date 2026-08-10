@@ -82,7 +82,7 @@ div.dataset.title = song.title;
 let isFavorite = favorites.includes(song.title);
 
 
-div.innerHTML=`
+div.innerHTML=
 
 <img src="${song.cover}">
 
@@ -100,7 +100,7 @@ div.innerHTML=`
 ${isFavorite ? "❤️" : "🤍"}
 </button>
 
-`;
+;
 
 div.onclick=()=>{
 
@@ -428,7 +428,7 @@ currentSeconds="0"+currentSeconds;
 
 
 currentTimeText.innerHTML=
-`${currentMinutes}:${currentSeconds}`;
+${currentMinutes}:${currentSeconds};
 
 
 
@@ -786,10 +786,10 @@ date = date.replace(
 
 
 document.getElementById("dateTime").innerHTML =
-`
+
 <div>${date}</div>
 <div>${time} IST</div>
-`;
+;
 
 }
 
@@ -932,7 +932,7 @@ function playRadio(stationId){
 
         const activeButton =
             document.querySelector(
-                `.radio-btn[data-radio="${stationId}"]`
+                .radio-btn[data-radio="${stationId}"]
             );
 
 
@@ -941,8 +941,8 @@ function playRadio(stationId){
             activeButton.classList.add("active");
 
             activeButton.innerHTML =
-                `⏸️ ${station.name}
-                 <span>${station.frequency}</span>`;
+                ⏸️ ${station.name}
+                 <span>${station.frequency}</span>;
 
         }
 
@@ -1009,8 +1009,8 @@ radioButtons.forEach(button=>{
 
 
             btn.innerHTML =
-                `▶️ ${station.name}
-                 <span>${station.frequency}</span>`;
+                ▶️ ${station.name}
+                 <span>${station.frequency}</span>;
 
         });
 
@@ -1091,8 +1091,8 @@ function stopRadio(){
 
 
             btn.innerHTML =
-                `▶️ ${station.name}
-                 <span>${station.frequency}</span>`;
+                ▶️ ${station.name}
+                 <span>${station.frequency}</span>;
 
         });
 
