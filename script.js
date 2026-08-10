@@ -55,6 +55,8 @@ let shuffleMode=false;
 
 let repeatMode=false;
 
+let currentRadio = null;
+
 let currentPlaylist = playlist;
 
 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -208,7 +210,7 @@ function addToRecentlyPlayed(song){
 
 function loadSong(index){
 
-    if(typeof currentRadio !== "undefined"){
+    if(currentRadio !== null){
 
         stopRadio();
 
@@ -427,8 +429,8 @@ currentSeconds="0"+currentSeconds;
 }
 
 
-currentTimeText.innerHTML=
-${currentMinutes}:${currentSeconds};
+currentTimeText.innerHTML =
+`${currentMinutes}:${currentSeconds}`;
 
 
 
@@ -444,7 +446,7 @@ durationSeconds="0"+durationSeconds;
 }
 
 
-durationText.innerHTML=
+durationText.innerHTML =
 `${durationMinutes}:${durationSeconds}`;
 
 
@@ -786,10 +788,7 @@ date = date.replace(
 
 
 document.getElementById("dateTime").innerHTML =
-
-<div>${date}</div>
-<div>${time} IST</div>
-;
+    `${date} | ${time}`;
 
 }
 
@@ -844,8 +843,6 @@ const radioStations = {
     }
 
 };
-
-let currentRadio = null;
 
 
 // ==========================
@@ -931,9 +928,9 @@ function playRadio(stationId){
         // Highlight selected radio
 
         const activeButton =
-            document.querySelector(
-                .radio-btn[data-radio="${stationId}"]
-            );
+    document.querySelector(
+        `.radio-btn[data-radio="${stationId}"]`
+    );
 
 
         if(activeButton){
@@ -941,8 +938,8 @@ function playRadio(stationId){
             activeButton.classList.add("active");
 
             activeButton.innerHTML =
-                ⏸️ ${station.name}
-                 <span>${station.frequency}</span>;
+    `⏸️ ${station.name}
+     <span>${station.frequency}</span>`;
 
         }
 
@@ -1009,8 +1006,8 @@ radioButtons.forEach(button=>{
 
 
             btn.innerHTML =
-                ▶️ ${station.name}
-                 <span>${station.frequency}</span>;
+    `▶️ ${station.name}
+     <span>${station.frequency}</span>`;
 
         });
 
@@ -1022,80 +1019,3 @@ radioButtons.forEach(button=>{
     });
 
 });
-
-
-// ==========================
-// Radio / Song Play Button
-// ==========================
-
-playBtn.addEventListener("click",()=>{
-
-    // If radio is currently selected
-
-    if(currentRadio){
-
-        if(audio.paused){
-
-            audio.play()
-            .then(()=>{
-
-                playBtn.innerHTML = "⏸";
-
-            })
-            .catch(error=>{
-
-                console.error(
-                    "Radio resume failed:",
-                    error
-                );
-
-            });
-
-        }
-
-        else{
-
-            audio.pause();
-
-            playBtn.innerHTML = "▶️";
-
-        }
-
-        return;
-
-    }
-
-});
-
-
-// ==========================
-// Stop Radio When Selecting Song
-// ==========================
-
-function stopRadio(){
-
-    if(currentRadio !== null){
-
-        currentRadio = null;
-
-        radioButtons.forEach(btn=>{
-
-            const id =
-                btn.dataset.radio;
-
-            const station =
-                radioStations[id];
-
-
-            btn.classList.remove("active");
-
-
-            btn.innerHTML =
-                ▶️ ${station.name}
-                 <span>${station.frequency}</span>;
-
-        });
-
-    }
-
-}
